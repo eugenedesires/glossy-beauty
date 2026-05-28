@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossy Beauty — Gloss & Lèvres</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --deep-red: #8B0000;
+    --red: #C0001A;
+    --bright-red: #E8001F;
+    --gold: #C9A84C;
+    --white: #f5f0ee;
+    --cream: #fdf8f5;
+    --gray: #2a2a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-follower {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200,0,26,0.5);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); font-style: italic; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    color: rgba(245,240,238,0.7);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 60px 60px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(139,0,0,0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,0,26,0.08) 0%, transparent 60%);
+  }
+
+  .hero-particles {
+    position: absolute; inset: 0;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--red);
+    border-radius: 50%;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 700px;
+    animation: heroIn 1.2s ease forwards;
+  }
+
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--red);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: rgba(245,240,238,0.6);
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+  }
+
+  .hero-cta {
+    display: inline-flex; gap: 20px; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    padding: 16px 40px;
+    background: var(--red);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--deep-red);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-outline {
+    padding: 16px 40px;
+    border: 1px solid rgba(245,240,238,0.3);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-outline:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid rgba(200,0,26,0.2);
+    border-bottom: 1px solid rgba(200,0,26,0.2);
+    padding: 16px 0;
+    background: rgba(139,0,0,0.05);
+  }
+  .marquee-track {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-track span {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(245,240,238,0.4);
+    padding: 0 40px;
+  }
+  .marquee-track span.dot {
+    color: var(--red);
+    padding: 0;
+    font-size: 1rem;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION HEADING */
+  .section { padding: 100px 60px; }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: var(--red); }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .product-card {
+    background: var(--gray);
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover { transform: translateY(-4px); }
+
+  .product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d0505 50%, #1a0a0a 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-img::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(200,0,26,0.2), transparent 70%);
+  }
+
+  .product-badge {
+    position: absolute; top: 16px; left: 16px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: 600;
+  }
+
+  .product-info {
+    padding: 24px;
+    border-top: 1px solid rgba(200,0,26,0.15);
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .product-desc {
+    font-size: 0.75rem;
+    color: rgba(245,240,238,0.5);
+    margin-bottom: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+
+  .product-footer {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--red);
+  }
+
+  .add-to-cart {
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid rgba(200,0,26,0.4);
+    color: var(--red);
+    font-size: 1.2rem;
+    cursor: none;
+    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .add-to-cart:hover {
+    background: var(--red);
+    color: var(--white);
+  }
+
+  /* CART SIDEBAR */
+  .cart-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-sidebar {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 400px;
+    background: #111;
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
+    display: flex; flex-direction: column;
+    border-left: 1px solid rgba(200,0,26,0.2);
+  }
+  .cart-sidebar.open { transform: translateX(0); }
+
+  .cart-header {
+    padding: 30px;
+    border-bottom: 1px solid rgba(200,0,26,0.15);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cart-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+  .cart-close {
+    background: none; border: none;
+    color: var(--white); font-size: 1.5rem;
+    cursor: none; opacity: 0.6; transition: opacity 0.2s;
+  }
+  .cart-close:hover { opacity: 1; }
+
+  .cart-items { flex: 1; overflow-y: auto; padding: 20px 30px; }
+
+  .cart-item {
+    display: flex; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .cart-item-icon {
+    width: 60px; height: 60px;
+    background: var(--gray);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .cart-item-info { flex: 1; }
+  .cart-item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+  .cart-item-price { color: var(--red); font-size: 0.9rem; }
+  .cart-item-remove {
+    background: none; border: none;
+    color: rgba(245,240,238,0.3);
+    cursor: none; font-size: 1rem;
+    transition: color 0.2s; align-self: center;
+  }
+  .cart-item-remove:hover { color: var(--red); }
+
+  .cart-footer {
+    padding: 24px 30px;
+    border-top: 1px solid rgba(200,0,26,0.15);
+  }
+  .cart-total {
+    display: flex; justify-content: space-between;
+    margin-bottom: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+  }
+  .cart-total span:last-child { color: var(--red); font-weight: 500; }
+
+  /* ORDER MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    padding: 20px;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: #111;
+    border: 1px solid rgba(200,0,26,0.3);
+    width: 100%; max-width: 520px;
+    max-height: 90vh; overflow-y: auto;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  .modal-overlay.open .modal { transform: scale(1); }
+
+  .modal-header {
+    padding: 30px 30px 20px;
+    border-bottom: 1px solid rgba(200,0,26,0.15);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+  }
+
+  .modal-body { padding: 30px; }
+
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,238,0.5);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0;
+    color: var(--white);
+    padding: 14px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    transition: border-color 0.3s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--red);
+    background: rgba(200,0,26,0.05);
+  }
+  .form-group select option { background: #111; }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .order-summary {
+    background: rgba(200,0,26,0.06);
+    border: 1px solid rgba(200,0,26,0.15);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .order-summary h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: rgba(245,240,238,0.7);
+    letter-spacing: 1px;
+  }
+  .order-summary-item {
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem;
+    color: rgba(245,240,238,0.6);
+    padding: 4px 0;
+  }
+  .order-summary-total {
+    display: flex; justify-content: space-between;
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid rgba(200,0,26,0.2);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--red);
+  }
+
+  .success-msg {
+    display: none;
+    text-align: center; padding: 40px 20px;
+  }
+  .success-msg .check { font-size: 3rem; margin-bottom: 16px; }
+  .success-msg h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; margin-bottom: 8px;
+  }
+  .success-msg p { color: rgba(245,240,238,0.5); font-size: 0.85rem; line-height: 1.6; }
+
+  /* ABOUT */
+  .about-section {
+    background: linear-gradient(180deg, #0a0a0a 0%, #120404 50%, #0a0a0a 100%);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .about-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #1a0505 0%, #2d0a0a 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem;
+    overflow: hidden;
+  }
+  .about-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(200,0,26,0.25), transparent 70%);
+  }
+  .about-visual::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(200,0,26,0.08), transparent);
+  }
+  .about-visual-border {
+    position: absolute;
+    top: 20px; left: 20px; right: -20px; bottom: -20px;
+    border: 1px solid rgba(200,0,26,0.2);
+    pointer-events: none;
+  }
+
+  .about-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: rgba(245,240,238,0.65);
+    margin-bottom: 24px;
+  }
+
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 30px; margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(200,0,26,0.15);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--red);
+    display: block; margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 0.6rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245,240,238,0.4);
+  }
+
+  /* CART COUNT */
+  .cart-btn {
+    position: relative;
+    background: none; border: none;
+    color: var(--white); cursor: none;
+    font-size: 1.2rem;
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border: 1px solid rgba(200,0,26,0.3);
+    transition: all 0.3s;
+  }
+  .cart-btn:hover { border-color: var(--red); color: var(--red); }
+  .cart-count {
+    background: var(--red);
+    color: var(--white);
+    border-radius: 50%;
+    width: 18px; height: 18px;
+    font-size: 0.6rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 60px;
+    border-top: 1px solid rgba(200,0,26,0.15);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+  }
+  .footer-logo span { color: var(--red); font-style: italic; }
+  footer p { font-size: 0.7rem; color: rgba(245,240,238,0.3); letter-spacing: 1px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--red);
+    color: var(--white);
+    padding: 14px 28px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 500;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero, .section { padding: 80px 24px 60px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .cart-sidebar { width: 100%; }
+    footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="follower"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><span>Glossy</span> Beauty</a>
+  <ul class="nav-links">
+    <li><a href="#produits">Produits</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="cart-btn" onclick="toggleCart()">
+    🛍 Panier
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Collection Signature</div>
+    <h1 class="hero-title">
+      Lèvres<br>
+      <em>Irrésistibles</em>
+    </h1>
+    <p class="hero-sub">Gloss de luxe pour un éclat naturel et sensuel</p>
+    <div class="hero-cta">
+      <a href="#produits" class="btn-primary"><span>Découvrir la collection</span></a>
+      <a href="#apropos" class="btn-outline">Notre histoire</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Gloss Longue Tenue</span><span class="dot">✦</span>
+    <span>Formule Hydratante</span><span class="dot">✦</span>
+    <span>Teintes Exclusives</span><span class="dot">✦</span>
+    <span>Livraison Rapide</span><span class="dot">✦</span>
+    <span>Qualité Premium</span><span class="dot">✦</span>
+    <span>Gloss Longue Tenue</span><span class="dot">✦</span>
+    <span>Formule Hydratante</span><span class="dot">✦</span>
+    <span>Teintes Exclusives</span><span class="dot">✦</span>
+    <span>Livraison Rapide</span><span class="dot">✦</span>
+    <span>Qualité Premium</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- PRODUITS -->
+<section class="section" id="produits">
+  <div class="section-label">Notre Collection</div>
+  <h2 class="section-title">Nos <em>Gloss</em></h2>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- À PROPOS -->
+<section class="section about-section" id="apropos">
+  <div class="section-label">Notre Histoire</div>
+  <div class="about-grid">
+    <div class="about-visual">
+      💄
+      <div class="about-visual-border"></div>
+    </div>
+    <div class="about-text">
+      <h2 class="section-title">La beauté,<br><em>réinventée</em></h2>
+      <p>Chez Glossy Beauty, chaque gloss est une invitation à vous sentir belle, confiante et lumineuse. Nos formules sont soigneusement élaborées pour nourrir vos lèvres tout en leur offrant un éclat irrésistible.</p>
+      <p>Des teintes soigneusement sélectionnées, une texture légère et confortable — parce que vous méritez le meilleur.</p>
+      <div class="about-stats">
+        <div>
+          <span class="stat-num">15+</span>
+          <span class="stat-label">Teintes</span>
+        </div>
+        <div>
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Clientes</span>
+        </div>
+        <div>
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Qualité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div>
+    <div class="footer-logo"><span>Glossy</span> Beauty</div>
+    <p style="margin-top:8px">glossybeauty@email.com · WhatsApp : +225 XX XX XX XX</p>
+  </div>
+  <p>© 2026 Glossy Beauty. Tous droits réservés.</p>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Mon Panier</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p style="color:rgba(245,240,238,0.3);font-size:0.8rem;text-align:center;padding:40px 0;">Votre panier est vide</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">0 FCFA</span>
+    </div>
+    <button class="btn-primary" style="width:100%;text-align:center;border:none;cursor:none;" onclick="openOrder()">
+      <span>Commander</span>
+    </button>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Finaliser la commande</h3>
+      <button class="cart-close" onclick="closeOrder()">✕</button>
+    </div>
+    <div class="modal-body" id="orderBody">
+      <div class="order-summary">
+        <h4>Récapitulatif</h4>
+        <div id="orderSummaryItems"></div>
+        <div class="order-summary-total">
+          <span>Total</span>
+          <span id="orderTotal">0 FCFA</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nom complet</label>
+        <input type="text" id="fname" placeholder="Votre nom et prénom">
+      </div>
+      <div class="form-group">
+        <label>Numéro WhatsApp</label>
+        <input type="tel" id="fphone" placeholder="+225 XX XX XX XX">
+      </div>
+      <div class="form-group">
+        <label>Ville de livraison</label>
+        <input type="text" id="fcity" placeholder="Ex: Abidjan, Cocody">
+      </div>
+      <div class="form-group">
+        <label>Adresse complète</label>
+        <textarea id="faddress" placeholder="Quartier, rue, description..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Mode de paiement</label>
+        <select id="fpayment">
+          <option value="">Choisir un mode de paiement</option>
+          <option value="Wave">Wave</option>
+          <option value="Orange Money">Orange Money</option>
+          <option value="MTN Mobile Money">MTN Mobile Money</option>
+          <option value="Moov Money">Moov Money</option>
+          <option value="Livraison (paiement à la réception)">Paiement à la réception</option>
+        </select>
+      </div>
+      <button class="btn-primary" style="width:100%;border:none;cursor:none;font-size:0.7rem;" onclick="placeOrder()">
+        <span>✓ Confirmer la commande</span>
+      </button>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div class="check">💋</div>
+      <h3>Commande confirmée !</h3>
+      <p>Merci pour votre commande.<br>Nous vous contacterons très bientôt sur WhatsApp pour confirmer la livraison.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Ajouté au panier</div>
+
+<script>
+// PRODUCTS DATA
+const products = [
+  { id:1, name:'Cherry Kiss', desc:'Teinte rouge cerise intense, brillance miroir', price:3500, icon:'💋', badge:'Bestseller' },
+  { id:2, name:'Rose Nude', desc:'Rose naturel, effet lèvres parfaites', price:3500, icon:'🌸', badge:'' },
+  { id:3, name:'Berry Glam', desc:'Bordeaux profond, texture fondante', price:4000, icon:'🍇', badge:'Nouveau' },
+  { id:4, name:'Coral Sunset', desc:'Corail lumineux, parfait pour l\'été', price:3500, icon:'🌅', badge:'' },
+  { id:5, name:'Mauve Dream', desc:'Mauve doux, tendance et raffiné', price:3500, icon:'💜', badge:'' },
+  { id:6, name:'Caramel Glow', desc:'Nude doré, éclat naturel hypnotisant', price:4000, icon:'✨', badge:'Nouveau' },
+];
+
+let cart = [];
+
+// RENDER PRODUCTS
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = products.map(p => `
+    <div class="product-card">
+      <div class="product-img">
+        ${p.icon}
+        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <div class="product-price">${p.price.toLocaleString('fr-FR')} FCFA</div>
+          <button class="add-to-cart" onclick="addToCart(${p.id})" title="Ajouter au panier">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// CART
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(i => i.id === id);
+  if (existing) existing.qty++;
+  else cart.push({ ...product, qty: 1 });
+  updateCartUI();
+  showToast(`${product.name} ajouté !`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = total.toLocaleString('fr-FR') + ' FCFA';
+  const itemsEl = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<p style="color:rgba(245,240,238,0.3);font-size:0.8rem;text-align:center;padding:40px 0;">Votre panier est vide</p>';
+  } else {
+    itemsEl.innerHTML = cart.map(i => `
+      <div class="cart-item">
+        <div class="cart-item-icon">${i.icon}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${i.name}</div>
+          <div class="cart-item-price">${(i.price * i.qty).toLocaleString('fr-FR')} FCFA × ${i.qty}</div>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${i.id})">✕</button>
+      </div>
+    `).join('');
+  }
+}
+
+function toggleCart() {
+  document.getElementById('cartOverlay').classList.toggle('open');
+  document.getElementById('cartSidebar').classList.toggle('open');
+}
+
+// ORDER
+function openOrder() {
+  if (cart.length === 0) { showToast('Panier vide !'); return; }
+  toggleCart();
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('orderSummaryItems').innerHTML = cart.map(i =>
+    `<div class="order-summary-item"><span>${i.name} ×${i.qty}</span><span>${(i.price*i.qty).toLocaleString('fr-FR')} FCFA</span></div>`
+  ).join('');
+  document.getElementById('orderTotal').textContent = total.toLocaleString('fr-FR') + ' FCFA';
+  document.getElementById('orderBody').style.display = 'block';
+  document.getElementById('successMsg').style.display = 'none';
+  document.getElementById('orderModal').classList.add('open');
+}
+
+function closeOrder() {
+  document.getElementById('orderModal').classList.remove('open');
+}
+
+function placeOrder() {
+  const name = document.getElementById('fname').value.trim();
+  const phone = document.getElementById('fphone').value.trim();
+  const city = document.getElementById('fcity').value.trim();
+  const address = document.getElementById('faddress').value.trim();
+  const payment = document.getElementById('fpayment').value;
+  if (!name || !phone || !city || !payment) {
+    showToast('Veuillez remplir tous les champs');
+    return;
+  }
+
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const items = cart.map(i => `• ${i.name} ×${i.qty} — ${(i.price*i.qty).toLocaleString('fr-FR')} FCFA`).join('\n');
+
+  const message =
+`🛍 *NOUVELLE COMMANDE — Glossy Beauty*
+
+👤 *Nom :* ${name}
+📞 *WhatsApp client :* ${phone}
+📍 *Ville :* ${city}
+🏠 *Adresse :* ${address || 'Non précisée'}
+💳 *Paiement :* ${payment}
+
+🧾 *Produits commandés :*
+${items}
+
+💰 *TOTAL : ${total.toLocaleString('fr-FR')} FCFA*`;
+
+  const waNumber = '2250143159266';
+  const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+  window.open(waUrl, '_blank');
+
+  document.getElementById('orderBody').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+  cart = [];
+  updateCartUI();
+}
+
+// TOAST
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// CURSOR
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('follower');
+let mx = 0, my = 0, fx = 0, fy = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+function animFollower() {
+  fx += (mx - fx - 18) * 0.12;
+  fy += (my - fy - 18) * 0.12;
+  follower.style.left = fx + 'px';
+  follower.style.top = fy + 'px';
+  requestAnimationFrame(animFollower);
+}
+animFollower();
+
+// PARTICLES
+function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${1+Math.random()*3}px;
+      height:${1+Math.random()*3}px;
+      animation-duration:${6+Math.random()*10}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    container.appendChild(p);
+  }
+}
+
+createParticles();
+renderProducts();
+</script>
+</body>
+</html>
