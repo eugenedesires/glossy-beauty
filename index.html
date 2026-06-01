@@ -6,15 +6,10 @@
 <title>Glossy Beauty — Gloss & Lèvres</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --black:#0a0a0a;--deep-red:#8B0000;--red:#C0001A;--gold:#C9A84C;
-  --white:#f5f0ee;--gray:#1e1e1e;--gray2:#2a2a2a;
-}
+:root{--black:#0a0a0a;--deep-red:#8B0000;--red:#C0001A;--gold:#C9A84C;--white:#f5f0ee;--gray:#1e1e1e;--gray2:#2a2a2a}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;overflow-x:hidden;cursor:none}
-
-/* LOADER */
 .loader{position:fixed;inset:0;background:var(--black);z-index:9000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity .8s,visibility .8s}
 .loader.hide{opacity:0;visibility:hidden;pointer-events:none}
 .loader-logo{font-family:'Playfair Display',serif;font-size:2.5rem;letter-spacing:4px;animation:pulse 1.2s ease infinite}
@@ -23,12 +18,17 @@ body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-se
 .loader-progress{height:100%;background:var(--red);animation:load 1.8s ease forwards}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes load{from{width:0}to{width:100%}}
-
-/* CURSOR */
 .cursor{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference}
 .cursor-follower{width:32px;height:32px;border:1px solid rgba(200,0,26,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:all .15s ease}
+@media(hover:none),(pointer:coarse){body{cursor:auto}.cursor,.cursor-follower{display:none!important}*{cursor:auto!important}}
 
-/* POPUP */
+/* LANG SWITCHER */
+.lang-switcher{display:flex;align-items:center;border:1px solid rgba(200,0,26,.4);overflow:hidden;border-radius:2px}
+.lang-btn{background:none;border:none;color:rgba(245,240,238,.45);cursor:none;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:2px;padding:6px 11px;transition:all .25s;font-weight:600;text-transform:uppercase}
+.lang-btn.active{background:var(--red);color:var(--white)}
+.lang-btn:not(.active):hover{color:var(--red)}
+.lang-sep{width:1px;background:rgba(200,0,26,.3);height:12px;align-self:center}
+
 .popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:800;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
 .popup-overlay.open{opacity:1;pointer-events:all}
 .popup{background:#111;border:1px solid rgba(200,0,26,.3);max-width:460px;width:100%;text-align:center;padding:50px 40px;position:relative;animation:popIn .4s ease forwards}
@@ -41,14 +41,10 @@ body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-se
 .popup p{color:rgba(245,240,238,.55);font-size:.82rem;line-height:1.7;margin-bottom:24px}
 .popup-code{background:rgba(200,0,26,.12);border:1px dashed var(--red);padding:12px 24px;font-size:1.1rem;letter-spacing:4px;font-weight:700;color:var(--red);margin-bottom:24px;cursor:none}
 .popup-timer{font-size:.65rem;color:rgba(245,240,238,.4);letter-spacing:2px;margin-bottom:20px}
-
-/* PROMO BANNER */
 .promo-banner{background:var(--red);padding:10px;text-align:center;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;justify-content:center;gap:20px}
 .promo-banner span{color:rgba(255,255,255,.7)}
 .promo-countdown{display:inline-flex;gap:6px;align-items:center;font-weight:700}
 .promo-countdown .unit{background:rgba(0,0,0,.25);padding:2px 6px;border-radius:2px}
-
-/* NAV */
 nav{position:fixed;top:0;width:100%;z-index:100;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,0,26,.1);transition:padding .3s}
 nav.scrolled{padding:12px 60px}
 .nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;letter-spacing:2px;color:var(--white);text-decoration:none}
@@ -56,7 +52,7 @@ nav.scrolled{padding:12px 60px}
 .nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{color:rgba(245,240,238,.6);text-decoration:none;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;transition:color .3s}
 .nav-links a:hover{color:var(--red)}
-.nav-right{display:flex;align-items:center;gap:12px}
+.nav-right{display:flex;align-items:center;gap:10px}
 .theme-btn{background:none;border:1px solid rgba(255,255,255,.1);color:rgba(245,240,238,.5);width:34px;height:34px;cursor:none;font-size:.9rem;transition:all .3s;display:flex;align-items:center;justify-content:center}
 .theme-btn:hover{border-color:var(--red);color:var(--red)}
 .cart-btn{background:none;border:1px solid rgba(200,0,26,.35);color:var(--white);cursor:none;font-family:'Montserrat',sans-serif;font-size:.7rem;letter-spacing:1px;padding:8px 16px;transition:all .3s;display:flex;align-items:center;gap:8px}
@@ -70,6 +66,9 @@ body.light .nav-links a{color:rgba(26,26,26,.65)}
 body.light .nav-logo{color:#1a1a1a}
 body.light .theme-btn{color:rgba(26,26,26,.5);border-color:rgba(26,26,26,.15)}
 body.light .cart-btn{color:#1a1a1a;border-color:rgba(200,0,26,.3)}
+body.light .lang-btn{color:rgba(26,26,26,.4)}
+body.light .lang-switcher{border-color:rgba(200,0,26,.3)}
+body.light .lang-sep{background:rgba(200,0,26,.2)}
 body.light .product-card{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 body.light .product-name{color:#1a1a1a}
 body.light .product-desc{color:rgba(26,26,26,.55)}
@@ -143,7 +142,6 @@ body.light .popup p{color:rgba(26,26,26,.55)}
 body.light .popup-timer{color:rgba(26,26,26,.4)}
 body.light .popup-close{color:rgba(26,26,26,.3)}
 
-/* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 60px 80px}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 65% 50%,rgba(139,0,0,.18) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 15% 80%,rgba(200,0,26,.07) 0%,transparent 60%)}
 .hero-particles{position:absolute;inset:0;overflow:hidden}
@@ -157,35 +155,25 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .hero-title em{font-style:italic;color:var(--red);display:block}
 .hero-sub{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;color:rgba(245,240,238,.55);margin-bottom:48px;letter-spacing:1px}
 .hero-cta{display:inline-flex;gap:20px;flex-wrap:wrap}
-
-/* BTN */
 .btn-primary{padding:15px 38px;background:var(--red);color:var(--white);text-decoration:none;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;position:relative;overflow:hidden;transition:all .3s;display:inline-block;border:none;cursor:none}
 .btn-primary::before{content:'';position:absolute;inset:0;background:var(--deep-red);transform:translateX(-100%);transition:transform .3s ease}
 .btn-primary:hover::before{transform:translateX(0)}
 .btn-primary span{position:relative;z-index:1}
 .btn-outline{padding:15px 38px;border:1px solid rgba(245,240,238,.3);color:var(--white);text-decoration:none;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all .3s;display:inline-block}
 .btn-outline:hover{border-color:var(--red);color:var(--red)}
-
-/* MARQUEE */
 .marquee-wrap{overflow:hidden;border-top:1px solid rgba(200,0,26,.15);border-bottom:1px solid rgba(200,0,26,.15);padding:14px 0;background:rgba(139,0,0,.04)}
 .marquee-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap}
 .marquee-track span{font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:rgba(245,240,238,.35);padding:0 36px}
 .marquee-track span.dot{color:var(--red);padding:0;font-size:.9rem}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* SECTIONS */
 .section{padding:100px 60px}
 .section-label{font-size:.58rem;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:12px}
 .section-label::before{content:'';width:28px;height:1px;background:var(--red)}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:14px}
 .section-title em{font-style:italic;color:var(--red)}
-
-/* FILTER */
 .filter-tabs{display:flex;gap:4px;margin:40px 0 0;flex-wrap:wrap}
 .filter-tab{padding:10px 22px;background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(245,240,238,.5);font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .3s}
 .filter-tab.active,.filter-tab:hover{background:var(--red);border-color:var(--red);color:var(--white)}
-
-/* PRODUCTS */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px;margin-top:22px}
 .product-card{background:var(--gray);position:relative;overflow:hidden;cursor:none;transition:transform .4s ease}
 .product-card:hover{transform:translateY(-6px)}
@@ -215,12 +203,8 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .qty-num{font-size:.85rem;min-width:16px;text-align:center}
 .add-to-cart{width:100%;padding:10px;background:transparent;border:1px solid rgba(200,0,26,.35);color:var(--red);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .3s;font-family:'Montserrat',sans-serif;font-weight:600}
 .add-to-cart:hover{background:var(--red);color:var(--white);border-color:var(--red)}
-
-/* SUGGESTIONS */
 .suggestions-section{padding:60px;background:var(--gray)}
 .suggestions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;margin-top:24px}
-
-/* PROMO SECTION */
 .promo-section{background:linear-gradient(135deg,var(--deep-red) 0%,#3a0000 100%);padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .promo-left h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:12px}
 .promo-left h2 em{font-style:italic}
@@ -234,8 +218,6 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .timer-num{font-family:'Playfair Display',serif;font-size:2rem;display:block;color:var(--gold)}
 .timer-label{font-size:.5rem;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,238,.4);margin-top:4px;display:block}
 .promo-right{text-align:center;font-size:8rem}
-
-/* DELIVERY CALCULATOR */
 .delivery-section{background:var(--gray)}
 .delivery-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:50px;align-items:start}
 .delivery-form{background:rgba(200,0,26,.05);border:1px solid rgba(200,0,26,.15);padding:36px}
@@ -257,8 +239,6 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .zone-delay{font-size:.68rem;color:rgba(245,240,238,.4);letter-spacing:1px}
 .zone-price{color:var(--red);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500}
 .zone-free{color:#25D366;font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-
-/* TESTIMONIALS */
 .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:2px;margin-top:50px}
 .testimonial-card{background:var(--gray);padding:30px;position:relative}
 .testimonial-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--red);opacity:.15;position:absolute;top:8px;left:18px;line-height:1}
@@ -268,8 +248,6 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .author-avatar{width:36px;height:36px;border-radius:50%;background:var(--deep-red);display:flex;align-items:center;justify-content:center;font-size:1rem}
 .author-name{font-size:.75rem;font-weight:600}
 .author-city{font-size:.6rem;color:rgba(245,240,238,.4);letter-spacing:1px;margin-top:2px}
-
-/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
 .about-visual{position:relative;aspect-ratio:4/5;background:linear-gradient(135deg,#1a0505 0%,#2d0a0a 100%);display:flex;align-items:center;justify-content:center;font-size:8rem;overflow:hidden}
 .about-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,0,26,.25),transparent 70%)}
@@ -278,8 +256,6 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;padding-top:36px;border-top:1px solid rgba(200,0,26,.12)}
 .stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--red);display:block;margin-bottom:4px}
 .stat-label{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,238,.35)}
-
-/* FAQ */
 .faq-section{background:var(--gray)}
 .faq-list{margin-top:50px;max-width:720px}
 .faq-item{border-bottom:1px solid rgba(200,0,26,.1)}
@@ -289,8 +265,6 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .faq-q.open .arrow{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:.83rem;line-height:1.8;color:rgba(245,240,238,.5)}
 .faq-a.open{max-height:300px;padding-bottom:18px}
-
-/* NEWSLETTER */
 .newsletter-section{background:linear-gradient(135deg,var(--deep-red) 0%,#4a0000 100%);padding:80px 60px;text-align:center}
 .newsletter-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:12px}
 .newsletter-section p{color:rgba(255,255,255,.6);font-size:.83rem;margin-bottom:32px}
@@ -299,15 +273,11 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .newsletter-input::placeholder{color:rgba(255,255,255,.4)}
 .newsletter-btn{background:var(--black);color:white;border:none;padding:14px 22px;font-family:'Montserrat',sans-serif;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;cursor:none;font-weight:600}
 .newsletter-btn:hover{background:#1a1a1a}
-
-/* WA FLOAT */
 .wa-float{position:fixed;bottom:32px;right:32px;z-index:500;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s;animation:bounce 2s ease infinite}
 .wa-float:hover{transform:scale(1.1);animation:none;box-shadow:0 8px 30px rgba(37,211,102,.6)}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .wa-tooltip{position:absolute;right:68px;background:#25D366;color:white;padding:6px 14px;border-radius:4px;font-size:.68rem;white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none}
 .wa-float:hover .wa-tooltip{opacity:1}
-
-/* CART */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
 .cart-overlay.open{opacity:1;pointer-events:all}
 .cart-sidebar{position:fixed;top:0;right:0;bottom:0;width:400px;background:#111;z-index:201;transform:translateX(100%);transition:transform .4s cubic-bezier(.77,0,.175,1);display:flex;flex-direction:column;border-left:1px solid rgba(200,0,26,.15)}
@@ -340,8 +310,6 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .cart-total-row.main{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);margin-top:8px;padding-top:8px;border-top:1px solid rgba(200,0,26,.12)}
 .cart-total-row.main span:last-child{color:var(--red)}
 .cart-empty{color:rgba(245,240,238,.25);font-size:.78rem;text-align:center;padding:50px 0}
-
-/* ORDER MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:20px}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:#111;border:1px solid rgba(200,0,26,.22);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:scale(.92);transition:transform .3s ease}
@@ -363,8 +331,6 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .success-msg .check{font-size:3rem;margin-bottom:14px}
 .success-msg h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:8px}
 .success-msg p{color:rgba(245,240,238,.45);font-size:.8rem;line-height:1.7}
-
-/* FOOTER */
 footer{padding:60px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:50px}
 .footer-brand .footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:14px}
@@ -380,15 +346,10 @@ footer{padding:60px}
 .social-links{display:flex;gap:16px}
 .social-links a{color:rgba(245,240,238,.32);text-decoration:none;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s}
 .social-links a:hover{color:var(--red)}
-
-/* TOAST */
 .toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--red);color:var(--white);padding:12px 24px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;z-index:5000;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
-
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-
 @media(max-width:900px){
   nav{padding:14px 18px}
   .nav-links{display:none}
@@ -405,32 +366,29 @@ footer{padding:60px}
 </head>
 <body>
 
-<!-- LOADER -->
 <div class="loader" id="loader">
   <div class="loader-logo"><span>Glossy</span> Beauty</div>
   <div class="loader-bar"><div class="loader-progress"></div></div>
 </div>
 
-<!-- POPUP BIENVENUE -->
 <div class="popup-overlay" id="popupOverlay">
   <div class="popup">
-    <button class="popup-close" onclick="closePopup()">✕</button>
-    <div class="popup-emoji">💋</div>
-    <h2>Bienvenue chez<br><em>Glossy Beauty</em></h2>
-    <p>Profitez de <strong>-10% sur votre première commande</strong> avec le code exclusif :</p>
-    <div class="popup-code" onclick="copyCode('GLOSSY10')" title="Cliquer pour copier">GLOSSY10</div>
-    <div class="popup-timer">Offre valable pour les nouvelles clientes uniquement</div>
-    <button class="btn-primary" onclick="closePopup()"><span>✨ Découvrir la boutique</span></button>
+    <button class="popup-close" onclick="closePopup()">&#x2715;</button>
+    <div class="popup-emoji">&#x1F48B;</div>
+    <h2 id="popupTitle"></h2>
+    <p id="popupText"></p>
+    <div class="popup-code" onclick="copyCode('GLOSSY10')" title="Click to copy">GLOSSY10</div>
+    <div class="popup-timer" id="popupTimer"></div>
+    <button class="btn-primary" onclick="closePopup()"><span id="popupBtn"></span></button>
   </div>
 </div>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-follower" id="follower"></div>
 
-<!-- PROMO BANNER -->
 <div class="promo-banner">
-  🎁 Livraison gratuite Abidjan dès 10 000 FCFA
-  <span>· Offre expire dans :</span>
+  &#x1F381; <span id="bannerText"></span>
+  <span id="bannerExpires"></span>
   <span class="promo-countdown">
     <span class="unit" id="ph">00</span>h
     <span class="unit" id="pm">00</span>m
@@ -438,236 +396,234 @@ footer{padding:60px}
   </span>
 </div>
 
-<!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo"><span>Glossy</span> Beauty</a>
   <ul class="nav-links">
-    <li><a href="#produits">Boutique</a></li>
-    <li><a href="#promo">Promos</a></li>
-    <li><a href="#livraison">Livraison</a></li>
-    <li><a href="#avis">Avis</a></li>
+    <li><a href="#produits" id="navShop"></a></li>
+    <li><a href="#promo" id="navPromo"></a></li>
+    <li><a href="#livraison" id="navDelivery"></a></li>
+    <li><a href="#avis" id="navReviews"></a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-btn" onclick="toggleTheme()" title="Mode clair/sombre">☀️</button>
-    <button class="cart-btn" onclick="toggleCart()">🛍 Panier <span class="cart-count" id="cartCount">0</span></button>
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btnFR" onclick="setLang('fr')">FR</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">&#x2600;&#xFE0F;</button>
+    <button class="cart-btn" onclick="toggleCart()">&#x1F6CD; <span id="navCart"></span> <span class="cart-count" id="cartCount">0</span></button>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-particles" id="particles"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Collection Signature 2026</div>
-    <h1 class="hero-title">Lèvres<br><em>Irrésistibles</em></h1>
-    <p class="hero-sub">Gloss de luxe pour un éclat naturel et sensuel</p>
+    <div class="hero-eyebrow" id="heroEyebrow"></div>
+    <h1 class="hero-title" id="heroTitle"></h1>
+    <p class="hero-sub" id="heroSub"></p>
     <div class="hero-cta">
-      <a href="#produits" class="btn-primary"><span>✦ Découvrir la collection</span></a>
-      <a href="#livraison" class="btn-outline">Zones de livraison</a>
+      <a href="#produits" class="btn-primary"><span id="heroCta1"></span></a>
+      <a href="#livraison" class="btn-outline" id="heroCta2"></a>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-wrap">
-  <div class="marquee-track">
-    <span>Gloss Longue Tenue</span><span class="dot">✦</span><span>Formule Hydratante</span><span class="dot">✦</span><span>15 Teintes Exclusives</span><span class="dot">✦</span><span>Livraison Rapide</span><span class="dot">✦</span><span>Qualité Premium</span><span class="dot">✦</span><span>500+ Clientes</span><span class="dot">✦</span><span>Gloss Longue Tenue</span><span class="dot">✦</span><span>Formule Hydratante</span><span class="dot">✦</span><span>15 Teintes Exclusives</span><span class="dot">✦</span><span>Livraison Rapide</span><span class="dot">✦</span><span>Qualité Premium</span><span class="dot">✦</span><span>500+ Clientes</span><span class="dot">✦</span>
-  </div>
+  <div class="marquee-track" id="marqueeTrack"></div>
 </div>
 
-<!-- BOUTIQUE -->
 <section class="section" id="produits">
-  <div class="section-label reveal">Notre Collection</div>
-  <h2 class="section-title reveal">Nos <em>Gloss</em></h2>
+  <div class="section-label reveal" id="shopLabel"></div>
+  <h2 class="section-title reveal" id="shopTitle"></h2>
   <div class="filter-tabs reveal" id="filterTabs">
-    <button class="filter-tab active" onclick="filterProducts('tous',this)">Tous</button>
-    <button class="filter-tab" onclick="filterProducts('bestseller',this)">Bestsellers</button>
-    <button class="filter-tab" onclick="filterProducts('nouveau',this)">Nouveautés</button>
-    <button class="filter-tab" onclick="filterProducts('promo',this)">Promos</button>
+    <button class="filter-tab active" onclick="filterProducts('tous',this)" id="ftAll"></button>
+    <button class="filter-tab" onclick="filterProducts('bestseller',this)" id="ftBest"></button>
+    <button class="filter-tab" onclick="filterProducts('nouveau',this)" id="ftNew"></button>
+    <button class="filter-tab" onclick="filterProducts('promo',this)" id="ftPromo"></button>
   </div>
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
-<!-- SUGGESTIONS -->
 <div class="suggestions-section" id="suggestionsSection" style="display:none">
-  <div class="section-label">Vous aimerez aussi</div>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:0">Produits <em style="font-style:italic;color:var(--red)">Similaires</em></h3>
+  <div class="section-label" id="suggLabel"></div>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:0" id="suggTitle"></h3>
   <div class="suggestions-grid" id="suggestionsGrid"></div>
 </div>
 
-<!-- PROMO -->
 <section class="promo-section" id="promo">
   <div class="promo-left">
-    <div class="section-label" style="margin-bottom:14px">Offre Spéciale</div>
-    <h2>Économisez <em>10%</em><br>dès maintenant</h2>
-    <p>Utilisez ce code exclusif lors de votre commande pour bénéficier d'une réduction immédiate sur toute la boutique.</p>
+    <div class="section-label" style="margin-bottom:14px" id="promoLabel"></div>
+    <h2 id="promoTitle"></h2>
+    <p id="promoDesc"></p>
     <div class="promo-code-box">
       <span class="promo-code-text">GLOSSY10</span>
-      <button class="copy-btn" onclick="copyCode('GLOSSY10')">Copier</button>
+      <button class="copy-btn" onclick="copyCode('GLOSSY10')" id="copyBtnText"></button>
     </div>
-    <p style="font-size:.75rem;color:rgba(245,240,238,.5);margin-bottom:20px">⏳ Cette offre expire dans :</p>
+    <p style="font-size:.75rem;color:rgba(245,240,238,.5);margin-bottom:20px" id="promoExpires"></p>
     <div class="promo-timer-big">
-      <div class="timer-unit"><span class="timer-num" id="th">00</span><span class="timer-label">Heures</span></div>
-      <div class="timer-unit"><span class="timer-num" id="tm">00</span><span class="timer-label">Minutes</span></div>
-      <div class="timer-unit"><span class="timer-num" id="ts">00</span><span class="timer-label">Secondes</span></div>
+      <div class="timer-unit"><span class="timer-num" id="th">00</span><span class="timer-label" id="timerH"></span></div>
+      <div class="timer-unit"><span class="timer-num" id="tm">00</span><span class="timer-label" id="timerM"></span></div>
+      <div class="timer-unit"><span class="timer-num" id="ts">00</span><span class="timer-label" id="timerS"></span></div>
     </div>
   </div>
-  <div class="promo-right">🎁</div>
+  <div class="promo-right">&#x1F381;</div>
 </section>
 
-<!-- LIVRAISON -->
 <section class="section delivery-section" id="livraison">
-  <div class="section-label reveal">Expédition</div>
-  <h2 class="section-title reveal">Calculateur de <em>Livraison</em></h2>
+  <div class="section-label reveal" id="delivLabel"></div>
+  <h2 class="section-title reveal" id="delivTitle"></h2>
   <div class="delivery-grid">
     <div class="delivery-form">
-      <h3>🚚 Calculer les frais</h3>
-      <p style="font-size:.78rem;color:rgba(245,240,238,.45);margin-bottom:20px;line-height:1.7">Sélectionnez votre ville pour connaître les frais et délais de livraison.</p>
+      <h3 id="delivCalcTitle"></h3>
+      <p style="font-size:.78rem;color:rgba(245,240,238,.45);margin-bottom:20px;line-height:1.7" id="delivCalcDesc"></p>
       <select class="delivery-select" id="deliveryCity" onchange="calcDelivery()">
-        <option value="">-- Choisir votre ville --</option>
-        <option value="abidjan_commune">Abidjan (Communes proches)</option>
-        <option value="abidjan_loin">Abidjan (Communes éloignées)</option>
-        <option value="bouake">Bouaké</option>
+        <option value="" id="optChooseCity"></option>
+        <option value="abidjan_commune" id="optAbidjanClose"></option>
+        <option value="abidjan_loin" id="optAbidjanFar"></option>
+        <option value="bouake">Bouak&#233;</option>
         <option value="daloa">Daloa</option>
-        <option value="san_pedro">San-Pédro</option>
+        <option value="san_pedro">San-P&#233;dro</option>
         <option value="yamoussoukro">Yamoussoukro</option>
         <option value="korhogo">Korhogo</option>
         <option value="man">Man</option>
         <option value="abengourou">Abengourou</option>
-        <option value="autres">Autres villes</option>
+        <option value="autres" id="optOther"></option>
       </select>
       <div class="delivery-result" id="deliveryResult"></div>
     </div>
     <div class="delivery-map">
-      <h3>📍 Toutes les zones</h3>
+      <h3 id="delivZonesTitle"></h3>
       <div class="zone-list" id="zoneList"></div>
     </div>
   </div>
 </section>
 
-<!-- AVIS -->
 <section class="section" id="avis" style="background:linear-gradient(180deg,#0a0a0a 0%,#110303 50%,#0a0a0a 100%)">
-  <div class="section-label reveal">Ce qu'elles disent</div>
-  <h2 class="section-title reveal">Avis <em>Clientes</em></h2>
+  <div class="section-label reveal" id="reviewsLabel"></div>
+  <h2 class="section-title reveal" id="reviewsTitle"></h2>
   <div class="testimonials-grid">
-    <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-text">Ce gloss tient toute la journée ! Je ne pars plus jamais sans mon Cherry Kiss. Vraiment top qualité.</p><div class="testimonial-author"><div class="author-avatar">👩🏾</div><div><div class="author-name">Aminata K.</div><div class="author-city">Abidjan, Cocody</div></div></div></div>
-    <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-text">Livraison rapide, produit conforme. Le Rose Nude est exactement ce que je cherchais. Je recommande !</p><div class="testimonial-author"><div class="author-avatar">👩🏽</div><div><div class="author-name">Fatoumata D.</div><div class="author-city">Abidjan, Yopougon</div></div></div></div>
-    <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-text">J'ai commandé 3 teintes et je suis satisfaite à 100%. Les lèvres restent hydratées et le brillant est magnifique.</p><div class="testimonial-author"><div class="author-avatar">👩🏿</div><div><div class="author-name">Adjoua M.</div><div class="author-city">Abidjan, Marcory</div></div></div></div>
-    <div class="testimonial-card reveal"><div class="stars">★★★★☆</div><p class="testimonial-text">Super produit ! Le Berry Glam est parfait pour les soirées. J'attends déjà la prochaine collection.</p><div class="testimonial-author"><div class="author-avatar">🧕🏾</div><div><div class="author-name">Mariam T.</div><div class="author-city">Bouaké</div></div></div></div>
+    <div class="testimonial-card reveal"><div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="testimonial-text" id="r1"></p><div class="testimonial-author"><div class="author-avatar">&#x1F469;&#x1F3FE;</div><div><div class="author-name">Aminata K.</div><div class="author-city">Abidjan, Cocody</div></div></div></div>
+    <div class="testimonial-card reveal"><div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="testimonial-text" id="r2"></p><div class="testimonial-author"><div class="author-avatar">&#x1F469;&#x1F3FD;</div><div><div class="author-name">Fatoumata D.</div><div class="author-city">Abidjan, Yopougon</div></div></div></div>
+    <div class="testimonial-card reveal"><div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div><p class="testimonial-text" id="r3"></p><div class="testimonial-author"><div class="author-avatar">&#x1F469;&#x1F3FF;</div><div><div class="author-name">Adjoua M.</div><div class="author-city">Abidjan, Marcory</div></div></div></div>
+    <div class="testimonial-card reveal"><div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;</div><p class="testimonial-text" id="r4"></p><div class="testimonial-author"><div class="author-avatar">&#x1F9D5;&#x1F3FE;</div><div><div class="author-name">Mariam T.</div><div class="author-city">Bouak&#233;</div></div></div></div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="section" id="apropos">
   <div class="about-grid">
-    <div class="about-visual reveal">💄<div class="about-visual-border"></div></div>
+    <div class="about-visual reveal">&#x1F484;<div class="about-visual-border"></div></div>
     <div class="about-text">
-      <div class="section-label">Notre Histoire</div>
-      <h2 class="section-title">La beauté,<br><em>réinventée</em></h2>
-      <p>Chez Glossy Beauty, chaque gloss est une invitation à vous sentir belle, confiante et lumineuse. Nos formules sont soigneusement élaborées pour nourrir vos lèvres tout en leur offrant un éclat irrésistible.</p>
-      <p>Des teintes soigneusement sélectionnées, une texture légère et confortable — parce que vous méritez le meilleur.</p>
+      <div class="section-label" id="aboutLabel"></div>
+      <h2 class="section-title" id="aboutTitle"></h2>
+      <p id="aboutP1"></p>
+      <p id="aboutP2"></p>
       <div class="about-stats">
-        <div><span class="stat-num">15+</span><span class="stat-label">Teintes</span></div>
-        <div><span class="stat-num">500+</span><span class="stat-label">Clientes</span></div>
-        <div><span class="stat-num">100%</span><span class="stat-label">Qualité</span></div>
+        <div><span class="stat-num">15+</span><span class="stat-label" id="stat1"></span></div>
+        <div><span class="stat-num">500+</span><span class="stat-label" id="stat2"></span></div>
+        <div><span class="stat-num">100%</span><span class="stat-label" id="stat3"></span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="section faq-section" id="faq">
-  <div class="section-label reveal">Questions fréquentes</div>
+  <div class="section-label reveal" id="faqLabel"></div>
   <h2 class="section-title reveal">FAQ</h2>
   <div class="faq-list" id="faqList"></div>
 </section>
 
-<!-- NEWSLETTER -->
 <div class="newsletter-section">
-  <h2>Restez <em style="font-style:italic">Brillante</em> 💋</h2>
-  <p>Inscrivez-vous pour recevoir les nouvelles collections et offres exclusives en avant-première</p>
+  <h2 id="nlTitle"></h2>
+  <p id="nlDesc"></p>
   <div class="newsletter-form">
-    <input class="newsletter-input" type="email" placeholder="Votre adresse email..." id="newsletterEmail">
-    <button class="newsletter-btn" onclick="subscribeNewsletter()">S'inscrire</button>
+    <input class="newsletter-input" type="email" id="newsletterEmail">
+    <button class="newsletter-btn" onclick="subscribeNewsletter()" id="nlBtn"></button>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer id="contact">
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-logo"><span>Glossy</span> Beauty</div>
-      <p>Votre beauté est notre passion. Des gloss de qualité premium pour sublimer vos lèvres au quotidien.</p>
+      <p id="footerDesc"></p>
     </div>
-    <div class="footer-col"><h4>Boutique</h4><ul><li><a href="#produits">Tous les gloss</a></li><li><a href="#produits">Bestsellers</a></li><li><a href="#produits">Nouveautés</a></li><li><a href="#promo">Promos</a></li></ul></div>
-    <div class="footer-col"><h4>Contact</h4><ul><li><a href="https://wa.me/2250143159266" target="_blank">WhatsApp</a></li><li><a href="#livraison">Livraison</a></li><li><a href="#faq">FAQ</a></li><li><a href="#avis">Avis</a></li></ul></div>
+    <div class="footer-col"><h4 id="footerShop"></h4><ul>
+      <li><a href="#produits" id="footerAllGloss"></a></li>
+      <li><a href="#produits" id="footerBest"></a></li>
+      <li><a href="#produits" id="footerNew"></a></li>
+      <li><a href="#promo" id="footerPromo"></a></li>
+    </ul></div>
+    <div class="footer-col"><h4 id="footerContact"></h4><ul>
+      <li><a href="https://wa.me/2250143159266" target="_blank">WhatsApp</a></li>
+      <li><a href="#livraison" id="footerDelivery"></a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#avis" id="footerReviews"></a></li>
+    </ul></div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Glossy Beauty · Abidjan, Côte d'Ivoire</p>
+    <p>&#169; 2026 Glossy Beauty &#183; Abidjan, C&#244;te d&#x27;Ivoire</p>
     <div class="social-links"><a href="https://wa.me/2250143159266" target="_blank">WhatsApp</a><a href="#">Instagram</a><a href="#">TikTok</a></div>
   </div>
 </footer>
 
-<!-- WA FLOAT -->
-<a class="wa-float" href="https://wa.me/2250143159266" target="_blank">💬<span class="wa-tooltip">Contactez-nous</span></a>
+<a class="wa-float" href="https://wa.me/2250143159266" target="_blank">&#x1F4AC;<span class="wa-tooltip" id="waTooltip"></span></a>
 
-<!-- CART -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
-  <div class="cart-header"><h3>Mon Panier</h3><button class="cart-close" onclick="toggleCart()">✕</button></div>
-  <div class="cart-items" id="cartItems"><p class="cart-empty">Votre panier est vide</p></div>
+  <div class="cart-header"><h3 id="cartTitle"></h3><button class="cart-close" onclick="toggleCart()">&#x2715;</button></div>
+  <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer">
     <div class="promo-input-wrap">
-      <input class="promo-input" type="text" id="promoInput" placeholder="Code promo...">
-      <button class="promo-apply" onclick="applyPromo()">Appliquer</button>
+      <input class="promo-input" type="text" id="promoInput">
+      <button class="promo-apply" onclick="applyPromo()" id="promoApplyBtn"></button>
     </div>
     <div class="promo-msg" id="promoMsg"></div>
     <div class="cart-total-rows" id="cartTotalRows"></div>
-    <button class="btn-primary" style="width:100%;text-align:center;border:none;cursor:none;" onclick="openOrder()"><span>✓ Commander</span></button>
+    <button class="btn-primary" style="width:100%;text-align:center;border:none;cursor:none;" onclick="openOrder()"><span id="cartOrderBtn"></span></button>
   </div>
 </div>
 
-<!-- ORDER MODAL -->
 <div class="modal-overlay" id="orderModal">
   <div class="modal">
-    <div class="modal-header"><h3>Finaliser la commande</h3><button class="cart-close" onclick="closeOrder()">✕</button></div>
+    <div class="modal-header"><h3 id="orderTitle"></h3><button class="cart-close" onclick="closeOrder()">&#x2715;</button></div>
     <div class="modal-body" id="orderBody">
-      <div class="order-summary"><h4>Récapitulatif</h4><div id="orderSummaryItems"></div><div class="order-summary-total"><span>Total</span><span id="orderTotal">0 FCFA</span></div></div>
-      <div class="form-group"><label>Nom complet</label><input type="text" id="fname" placeholder="Votre nom et prénom"></div>
-      <div class="form-group"><label>Numéro WhatsApp</label><input type="tel" id="fphone" placeholder="+225 XX XX XX XX"></div>
-      <div class="form-group"><label>Ville de livraison</label>
+      <div class="order-summary"><h4 id="orderSummaryLabel"></h4><div id="orderSummaryItems"></div><div class="order-summary-total"><span id="totalLabel"></span><span id="orderTotal">0 FCFA</span></div></div>
+      <div class="form-group"><label id="fLabelName"></label><input type="text" id="fname"></div>
+      <div class="form-group"><label id="fLabelPhone"></label><input type="tel" id="fphone" placeholder="+225 XX XX XX XX"></div>
+      <div class="form-group"><label id="fLabelCity"></label>
         <select id="fcity">
-          <option value="">Choisir votre ville</option>
-          <option value="Abidjan (Communes proches)">Abidjan - Communes proches</option>
-          <option value="Abidjan (Communes éloignées)">Abidjan - Communes éloignées</option>
-          <option value="Bouaké">Bouaké</option>
+          <option value="" id="fcityDefault"></option>
+          <option value="Abidjan (Communes proches)" id="fcityAbjClose"></option>
+          <option value="Abidjan (Communes &#233;loign&#233;es)" id="fcityAbjFar"></option>
+          <option value="Bouak&#233;">Bouak&#233;</option>
           <option value="Daloa">Daloa</option>
-          <option value="San-Pédro">San-Pédro</option>
+          <option value="San-P&#233;dro">San-P&#233;dro</option>
           <option value="Yamoussoukro">Yamoussoukro</option>
           <option value="Korhogo">Korhogo</option>
           <option value="Man">Man</option>
           <option value="Abengourou">Abengourou</option>
-          <option value="Autre ville">Autre ville</option>
+          <option value="Autre ville" id="fcityOther"></option>
         </select>
       </div>
-      <div class="form-group"><label>Adresse complète</label><textarea id="faddress" placeholder="Quartier, rue, description..."></textarea></div>
-      <div class="form-group"><label>Mode de paiement</label>
+      <div class="form-group"><label id="fLabelAddr"></label><textarea id="faddress"></textarea></div>
+      <div class="form-group"><label id="fLabelPayment"></label>
         <select id="fpayment">
-          <option value="">Choisir un mode de paiement</option>
-          <option value="Wave">💙 Wave</option>
-          <option value="Orange Money">🟠 Orange Money</option>
-          <option value="MTN Mobile Money">💛 MTN Mobile Money</option>
-          <option value="Moov Money">🔵 Moov Money</option>
-          <option value="Paiement à la réception">🤝 Paiement à la réception</option>
+          <option value="" id="fpayDefault"></option>
+          <option value="Wave">&#x1F499; Wave</option>
+          <option value="Orange Money">&#x1F7E0; Orange Money</option>
+          <option value="MTN Mobile Money">&#x1F49B; MTN Mobile Money</option>
+          <option value="Moov Money">&#x1F535; Moov Money</option>
+          <option value="Paiement &#224; la r&#233;ception" id="fpayDelivery"></option>
         </select>
       </div>
-      <button class="btn-primary" style="width:100%;border:none;cursor:none;font-size:.7rem;margin-top:6px;" onclick="placeOrder()"><span>💋 Confirmer la commande</span></button>
+      <button class="btn-primary" style="width:100%;border:none;cursor:none;font-size:.7rem;margin-top:6px;" onclick="placeOrder()"><span id="orderConfirmBtn"></span></button>
     </div>
     <div class="success-msg" id="successMsg">
-      <div class="check">💋</div>
-      <h3>Commande confirmée !</h3>
-      <p>WhatsApp va s'ouvrir pour envoyer votre commande.<br>Vous serez contactée très bientôt pour confirmer la livraison. ✨</p>
+      <div class="check">&#x1F48B;</div>
+      <h3 id="successTitle"></h3>
+      <p id="successDesc"></p>
     </div>
   </div>
 </div>
@@ -675,70 +631,289 @@ footer{padding:60px}
 <div class="toast" id="toast"></div>
 
 <script>
-// ========== DATA ==========
+// ===== TRANSLATIONS =====
+const T = {
+  fr: {
+    popupTitle: 'Bienvenue chez <em>Glossy Beauty</em>',
+    popupText: 'Profitez de <strong>-10% sur votre premi&#232;re commande</strong> avec le code exclusif&#160;:',
+    popupTimer: 'Offre valable pour les nouvelles clientes uniquement',
+    popupBtn: '&#x2728; D&#233;couvrir la boutique',
+    bannerText: 'Livraison gratuite Abidjan d&#232;s 10&#160;000 FCFA',
+    bannerExpires: '&#183; Offre expire dans&#160;:',
+    navShop:'Boutique', navPromo:'Promos', navDelivery:'Livraison', navReviews:'Avis', navCart:'Panier',
+    heroEyebrow:'Collection Signature 2026',
+    heroTitle:'L&#232;vres<br><em>Irr&#233;sistibles</em>',
+    heroSub:'Gloss de luxe pour un &#233;clat naturel et sensuel',
+    heroCta1:'&#x2756; D&#233;couvrir la collection', heroCta2:'Zones de livraison',
+    marquee:['Gloss Longue Tenue','Formule Hydratante','15 Teintes Exclusives','Livraison Rapide','Qualit&#233; Premium','500+ Clientes'],
+    shopLabel:'Notre Collection', shopTitle:'Nos <em>Gloss</em>',
+    ftAll:'Tous', ftBest:'Bestsellers', ftNew:'Nouveaut&#233;s', ftPromo:'Promos',
+    suggLabel:'Vous aimerez aussi', suggTitle:'Produits <em>Similaires</em>',
+    addToCart:'+ Ajouter au panier', addShort:'+ Ajouter', share:'&#x1F4E4; Partager',
+    stockMsg: n => `Plus que ${n}&#160;!`,
+    promoLabel:'Offre Sp&#233;ciale',
+    promoTitle:'&#201;conomisez <em>10%</em><br>d&#232;s maintenant',
+    promoDesc:"Utilisez ce code exclusif lors de votre commande pour b&#233;n&#233;ficier d'une r&#233;duction imm&#233;diate sur toute la boutique.",
+    copyBtn:'Copier', promoExpires:'&#x23F3; Cette offre expire dans&#160;:',
+    timerH:'Heures', timerM:'Minutes', timerS:'Secondes',
+    delivLabel:'Exp&#233;dition', delivTitle:'Calculateur de <em>Livraison</em>',
+    delivCalcTitle:'&#x1F69A; Calculer les frais',
+    delivCalcDesc:'S&#233;lectionnez votre ville pour conna&#238;tre les frais et d&#233;lais de livraison.',
+    optChooseCity:'-- Choisir votre ville --',
+    optAbidjanClose:'Abidjan (Communes proches)', optAbidjanFar:'Abidjan (Communes &#233;loign&#233;es)', optOther:'Autres villes',
+    delivZonesTitle:'&#x1F4CD; Toutes les zones',
+    zFreeFrom: n => `Gratuit d&#232;s ${n}`,
+    drDelay:'D&#233;lai de livraison', drFees:'Frais de livraison',
+    drFreeFrom:'Livraison gratuite d&#232;s', drFreeLabel:'GRATUIT &#x2713;', drPurchase:"d'achat",
+    drTotal:'Total estim&#233; (panier actuel)',
+    reviewsLabel:"Ce qu'elles disent", reviewsTitle:'Avis <em>Clientes</em>',
+    r1:"Ce gloss tient toute la journ&#233;e&#160;! Je ne pars plus jamais sans mon Cherry Kiss. Vraiment top qualit&#233;.",
+    r2:"Livraison rapide, produit conforme. Le Rose Nude est exactement ce que je cherchais. Je recommande&#160;!",
+    r3:"J'ai command&#233; 3 teintes et je suis satisfaite &#224; 100&#160;%. Les l&#232;vres restent hydrat&#233;es et le brillant est magnifique.",
+    r4:"Super produit&#160;! Le Berry Glam est parfait pour les soir&#233;es. J'attends d&#233;j&#224; la prochaine collection.",
+    aboutLabel:'Notre Histoire', aboutTitle:'La beaut&#233;,<br><em>r&#233;invent&#233;e</em>',
+    aboutP1:"Chez Glossy Beauty, chaque gloss est une invitation &#224; vous sentir belle, confiante et lumineuse. Nos formules sont soigneusement &#233;labor&#233;es pour nourrir vos l&#232;vres tout en leur offrant un &#233;clat irr&#233;sistible.",
+    aboutP2:"Des teintes soigneusement s&#233;lectionn&#233;es, une texture l&#233;g&#232;re et confortable &#8212; parce que vous m&#233;ritez le meilleur.",
+    stat1:'Teintes', stat2:'Clientes', stat3:'Qualit&#233;',
+    faqLabel:'Questions fr&#233;quentes',
+    faqs:[
+      {q:'Combien de temps le gloss tient-il&#160;?',a:'Nos gloss tiennent en moyenne 4 &#224; 6 heures. Avec une application renouvel&#233;e apr&#232;s les repas, vous profitez de l&#232;vres brillantes toute la journ&#233;e.'},
+      {q:'Quels sont les d&#233;lais de livraison&#160;?',a:"Pour Abidjan&#160;: 24 &#224; 48h. Pour les autres villes de C&#244;te d'Ivoire&#160;: 2 &#224; 5 jours ouvrables. Vous serez contact&#233;e sur WhatsApp d&#232;s l'exp&#233;dition."},
+      {q:'Quels modes de paiement acceptez-vous&#160;?',a:'Nous acceptons Wave, Orange Money, MTN Mobile Money, Moov Money et le paiement &#224; la r&#233;ception pour Abidjan.'},
+      {q:'Puis-je retourner un produit&#160;?',a:"Si votre produit arrive endommag&#233; ou ne correspond pas &#224; votre commande, contactez-nous sur WhatsApp dans les 24h avec des photos. Nous trouverons une solution."},
+      {q:'Comment utiliser un code promo&#160;?',a:'Dans votre panier, entrez votre code promo dans le champ pr&#233;vu et cliquez sur &#171;&#160;Appliquer&#160;&#187;. La r&#233;duction sera calcul&#233;e automatiquement sur votre total.'},
+      {q:'Les produits sont-ils test&#233;s dermatologiquement&#160;?',a:'Oui&#160;! Tous nos gloss sont formul&#233;s avec des ingr&#233;dients hydratants et test&#233;s pour convenir &#224; tous les types de l&#232;vres, y compris les peaux sensibles.'},
+    ],
+    nlTitle:'Restez <em>Brillante</em> &#x1F48B;',
+    nlDesc:"Inscrivez-vous pour recevoir les nouvelles collections et offres exclusives en avant-premi&#232;re",
+    nlPlaceholder:'Votre adresse email...', nlBtn:"S'inscrire",
+    footerDesc:"Votre beaut&#233; est notre passion. Des gloss de qualit&#233; premium pour sublimer vos l&#232;vres au quotidien.",
+    footerShop:'Boutique', footerContact:'Contact',
+    footerAllGloss:'Tous les gloss', footerBest:'Bestsellers', footerNew:'Nouveaut&#233;s', footerPromo:'Promos',
+    footerDelivery:'Livraison', footerReviews:'Avis',
+    waTooltip:'Contactez-nous',
+    cartTitle:'Mon Panier', cartEmpty:'Votre panier est vide',
+    cartSubtotal:'Sous-total', cartDiscount:'R&#233;duction', cartTotal:'Total',
+    cartOrderBtn:'&#x2713; Commander',
+    promoPlaceholder:'Code promo...', promoApplyBtn:'Appliquer',
+    promoOk: (code,label) => `&#x2713; Code "${code}" appliqu&#233;&#160;! ${label} de r&#233;duction`,
+    promoErr:"Code invalide. Essayez GLOSSY10 &#x1F609;",
+    orderTitle:'Finaliser la commande', orderSummaryLabel:'R&#233;capitulatif', totalLabel:'Total',
+    fLabelName:'Nom complet', fNamePh:'Votre nom et pr&#233;nom',
+    fLabelPhone:'Num&#233;ro WhatsApp', fLabelCity:'Ville de livraison',
+    fcityDefault:'Choisir votre ville',
+    fcityAbjClose:'Abidjan - Communes proches', fcityAbjFar:'Abidjan - Communes &#233;loign&#233;es', fcityOther:'Autre ville',
+    fLabelAddr:'Adresse compl&#232;te', fAddrPh:'Quartier, rue, description...',
+    fLabelPayment:'Mode de paiement', fpayDefault:'Choisir un mode de paiement',
+    fpayDelivery:'&#x1F91D; Paiement &#224; la r&#233;ception',
+    orderConfirmBtn:'&#x1F48B; Confirmer la commande',
+    successTitle:'Commande confirm&#233;e&#160;!',
+    successDesc:"WhatsApp va s'ouvrir pour envoyer votre commande.<br>Vous serez contact&#233;e tr&#232;s bient&#244;t pour confirmer la livraison. &#x2728;",
+    toastAdded: n => `${n} ajout&#233;&#160;! &#x1F48B;`,
+    toastCopied: c => `Code ${c} copi&#233;&#160;! &#x1F389;`,
+    toastPromo: l => `Code promo ${l} appliqu&#233;&#160;! &#x1F389;`,
+    toastEmpty:'Votre panier est vide&#160;!', toastFill:'Veuillez remplir tous les champs&#160;!',
+    toastEmailErr:'Entrez un email valide&#160;!', toastNewsletter:'Merci pour votre inscription&#160;! &#x1F48B;',
+    qtyLabel:'Qt&#233;&#160;:',
+    zoneDelay: d => d,
+    waMsg: (name,phone,city,addr,payment,promoLine,items,total) =>
+      `&#x1F6CD; *NOUVELLE COMMANDE &#8212; Glossy Beauty*\n\n&#x1F464; *Nom :* ${name}\n&#x1F4DE; *WhatsApp :* ${phone}\n&#x1F4CD; *Ville :* ${city}\n&#x1F3E0; *Adresse :* ${addr||'Non pr&#233;cis&#233;e'}\n&#x1F4B3; *Paiement :* ${payment}\n${promoLine}\n&#x1F9FE; *Produits :*\n${items}\n\n&#x1F4B0; *TOTAL : ${total} FCFA*\n\n_Via glossybeauty.com_`
+  },
+  en: {
+    popupTitle: 'Welcome to <em>Glossy Beauty</em>',
+    popupText: 'Enjoy <strong>-10% on your first order</strong> with the exclusive code:',
+    popupTimer: 'Offer valid for new customers only',
+    popupBtn: '&#x2728; Discover the store',
+    bannerText: 'Free delivery in Abidjan from 10,000 FCFA',
+    bannerExpires: '&#183; Offer expires in:',
+    navShop:'Shop', navPromo:'Deals', navDelivery:'Delivery', navReviews:'Reviews', navCart:'Cart',
+    heroEyebrow:'Signature Collection 2026',
+    heroTitle:'Irresistible<br><em>Lips</em>',
+    heroSub:'Luxury gloss for a natural, sensual shine',
+    heroCta1:'&#x2756; Discover the collection', heroCta2:'Delivery zones',
+    marquee:['Long-Lasting Gloss','Hydrating Formula','15 Exclusive Shades','Fast Delivery','Premium Quality','500+ Customers'],
+    shopLabel:'Our Collection', shopTitle:'Our <em>Gloss</em>',
+    ftAll:'All', ftBest:'Bestsellers', ftNew:'New', ftPromo:'Deals',
+    suggLabel:'You may also like', suggTitle:'Similar <em>Products</em>',
+    addToCart:'+ Add to cart', addShort:'+ Add', share:'&#x1F4E4; Share',
+    stockMsg: n => `Only ${n} left!`,
+    promoLabel:'Special Offer',
+    promoTitle:'Save <em>10%</em><br>right now',
+    promoDesc:'Use this exclusive code at checkout to get an instant discount across the entire store.',
+    copyBtn:'Copy', promoExpires:'&#x23F3; This offer expires in:',
+    timerH:'Hours', timerM:'Minutes', timerS:'Seconds',
+    delivLabel:'Shipping', delivTitle:'Delivery <em>Calculator</em>',
+    delivCalcTitle:'&#x1F69A; Calculate shipping',
+    delivCalcDesc:'Select your city to see delivery fees and estimated time.',
+    optChooseCity:'-- Choose your city --',
+    optAbidjanClose:'Abidjan (Nearby areas)', optAbidjanFar:'Abidjan (Farther areas)', optOther:'Other cities',
+    delivZonesTitle:'&#x1F4CD; All zones',
+    zFreeFrom: n => `Free from ${n}`,
+    drDelay:'Delivery time', drFees:'Delivery fees',
+    drFreeFrom:'Free delivery from', drFreeLabel:'FREE &#x2713;', drPurchase:'of purchase',
+    drTotal:'Estimated total (current cart)',
+    reviewsLabel:'What they say', reviewsTitle:'Customer <em>Reviews</em>',
+    r1:"This gloss lasts all day! I never leave without my Cherry Kiss. Truly top quality.",
+    r2:"Fast delivery, product as described. Rose Nude is exactly what I was looking for. I recommend!",
+    r3:"I ordered 3 shades and I'm 100% satisfied. Lips stay hydrated and the shine is gorgeous.",
+    r4:"Amazing product! Berry Glam is perfect for evenings. Already waiting for the next collection.",
+    aboutLabel:'Our Story', aboutTitle:'Beauty,<br><em>reinvented</em>',
+    aboutP1:"At Glossy Beauty, every gloss is an invitation to feel beautiful, confident, and radiant. Our formulas are carefully crafted to nourish your lips while giving them an irresistible shine.",
+    aboutP2:"Carefully selected shades, a light and comfortable texture &#8212; because you deserve the best.",
+    stat1:'Shades', stat2:'Customers', stat3:'Quality',
+    faqLabel:'Frequently asked',
+    faqs:[
+      {q:'How long does the gloss last?',a:'Our glosses last an average of 4 to 6 hours. With a touch-up after meals, you can enjoy shiny lips all day long.'},
+      {q:"What are the delivery times?",a:"For Abidjan: 24 to 48 hours. For other cities in C&#244;te d'Ivoire: 2 to 5 business days. You'll be contacted on WhatsApp once shipped."},
+      {q:'What payment methods do you accept?',a:'We accept Wave, Orange Money, MTN Mobile Money, Moov Money, and cash on delivery for Abidjan.'},
+      {q:'Can I return a product?',a:"If your product arrives damaged or doesn't match your order, contact us on WhatsApp within 24 hours with photos. We'll find a solution."},
+      {q:'How do I use a promo code?',a:'In your cart, enter your promo code and click "Apply". The discount will be calculated automatically on your total.'},
+      {q:'Are products dermatologically tested?',a:'Yes! All our glosses are formulated with moisturizing ingredients and tested to suit all lip types, including sensitive skin.'},
+    ],
+    nlTitle:'Stay <em>Radiant</em> &#x1F48B;',
+    nlDesc:"Sign up to receive new collections and exclusive offers first",
+    nlPlaceholder:'Your email address...', nlBtn:'Subscribe',
+    footerDesc:"Your beauty is our passion. Premium quality glosses to enhance your lips every day.",
+    footerShop:'Shop', footerContact:'Contact',
+    footerAllGloss:'All glosses', footerBest:'Bestsellers', footerNew:'New', footerPromo:'Deals',
+    footerDelivery:'Delivery', footerReviews:'Reviews',
+    waTooltip:'Contact us',
+    cartTitle:'My Cart', cartEmpty:'Your cart is empty',
+    cartSubtotal:'Subtotal', cartDiscount:'Discount', cartTotal:'Total',
+    cartOrderBtn:'&#x2713; Order',
+    promoPlaceholder:'Promo code...', promoApplyBtn:'Apply',
+    promoOk: (code,label) => `&#x2713; Code "${code}" applied! ${label} discount`,
+    promoErr:"Invalid code. Try GLOSSY10 &#x1F609;",
+    orderTitle:'Complete your order', orderSummaryLabel:'Summary', totalLabel:'Total',
+    fLabelName:'Full name', fNamePh:'Your name and surname',
+    fLabelPhone:'WhatsApp number', fLabelCity:'Delivery city',
+    fcityDefault:'Choose your city',
+    fcityAbjClose:'Abidjan - Nearby areas', fcityAbjFar:'Abidjan - Farther areas', fcityOther:'Other city',
+    fLabelAddr:'Full address', fAddrPh:'Neighborhood, street, details...',
+    fLabelPayment:'Payment method', fpayDefault:'Choose a payment method',
+    fpayDelivery:'&#x1F91D; Cash on delivery',
+    orderConfirmBtn:'&#x1F48B; Confirm order',
+    successTitle:'Order confirmed!',
+    successDesc:"WhatsApp will open to send your order.<br>You'll be contacted shortly to confirm delivery. &#x2728;",
+    toastAdded: n => `${n} added! &#x1F48B;`,
+    toastCopied: c => `Code ${c} copied! &#x1F389;`,
+    toastPromo: l => `Promo code ${l} applied! &#x1F389;`,
+    toastEmpty:'Your cart is empty!', toastFill:'Please fill in all fields!',
+    toastEmailErr:'Enter a valid email!', toastNewsletter:'Thanks for subscribing! &#x1F48B;',
+    qtyLabel:'Qty:',
+    zoneDelay: d => d.replace('jours','days').replace('jour','day'),
+    waMsg: (name,phone,city,addr,payment,promoLine,items,total) =>
+      `&#x1F6CD; *NEW ORDER &#8212; Glossy Beauty*\n\n&#x1F464; *Name:* ${name}\n&#x1F4DE; *WhatsApp:* ${phone}\n&#x1F4CD; *City:* ${city}\n&#x1F3E0; *Address:* ${addr||'Not specified'}\n&#x1F4B3; *Payment:* ${payment}\n${promoLine}\n&#x1F9FE; *Products:*\n${items}\n\n&#x1F4B0; *TOTAL: ${total} FCFA*\n\n_Via glossybeauty.com_`
+  }
+};
+
+// ===== DATA =====
 const products = [
-  {id:1,name:'Cherry Kiss',desc:'Teinte rouge cerise intense, brillance miroir',price:3500,icon:'💋',badge:'Bestseller',tag:'bestseller',colors:['#C0001A','#8B0000','#FF3344'],stock:5},
-  {id:2,name:'Rose Nude',desc:'Rose naturel, effet lèvres parfaites',price:3500,icon:'🌸',badge:'',tag:'',colors:['#E8B4B8','#D4898C','#F5CDD0'],stock:12},
-  {id:3,name:'Berry Glam',desc:'Bordeaux profond, texture fondante',price:4000,icon:'🍇',badge:'Nouveau',tag:'nouveau',colors:['#6B2D3E','#8B1A4A','#A0324F'],stock:8},
-  {id:4,name:'Coral Sunset',desc:'Corail lumineux, parfait pour l\'été',price:3500,icon:'🌅',badge:'',tag:'',colors:['#FF6B4A','#E85530','#FF8C6B'],stock:15},
-  {id:5,name:'Mauve Dream',desc:'Mauve doux, tendance et raffiné',price:3000,oldPrice:3500,icon:'💜',badge:'Promo',tag:'promo',colors:['#9B6B9B','#7A4A7A','#B08AB0'],stock:3},
-  {id:6,name:'Caramel Glow',desc:'Nude doré, éclat naturel hypnotisant',price:4000,icon:'✨',badge:'Nouveau',tag:'nouveau',colors:['#C4813A','#A66020','#D4975A'],stock:7},
-  {id:7,name:'Plum Velvet',desc:'Prune velouté, sensuel et mystérieux',price:4000,icon:'🍷',badge:'Bestseller',tag:'bestseller',colors:['#6B1F4A','#8B2060','#501540'],stock:2},
-  {id:8,name:'Peach Glow',desc:'Pêche lumineux, doux et féminin',price:3500,oldPrice:4000,icon:'🍑',badge:'Promo',tag:'promo',colors:['#FFAA7A','#E88A55','#FFCC99'],stock:9},
+  {id:1,name:'Cherry Kiss',desc_fr:'Teinte rouge cerise intense, brillance miroir',desc_en:'Intense cherry red, mirror shine',price:3500,icon:'&#x1F48B;',badge_fr:'Bestseller',badge_en:'Bestseller',tag:'bestseller',colors:['#C0001A','#8B0000','#FF3344'],stock:5},
+  {id:2,name:'Rose Nude',desc_fr:'Rose naturel, effet l&#232;vres parfaites',desc_en:'Natural pink, perfect lips effect',price:3500,icon:'&#x1F338;',badge_fr:'',badge_en:'',tag:'',colors:['#E8B4B8','#D4898C','#F5CDD0'],stock:12},
+  {id:3,name:'Berry Glam',desc_fr:'Bordeaux profond, texture fondante',desc_en:'Deep bordeaux, melting texture',price:4000,icon:'&#x1F347;',badge_fr:'Nouveau',badge_en:'New',tag:'nouveau',colors:['#6B2D3E','#8B1A4A','#A0324F'],stock:8},
+  {id:4,name:'Coral Sunset',desc_fr:"Corail lumineux, parfait pour l'&#233;t&#233;",desc_en:'Luminous coral, perfect for summer',price:3500,icon:'&#x1F305;',badge_fr:'',badge_en:'',tag:'',colors:['#FF6B4A','#E85530','#FF8C6B'],stock:15},
+  {id:5,name:'Mauve Dream',desc_fr:'Mauve doux, tendance et raffin&#233;',desc_en:'Soft mauve, trendy and refined',price:3000,oldPrice:3500,icon:'&#x1F49C;',badge_fr:'Promo',badge_en:'Sale',tag:'promo',colors:['#9B6B9B','#7A4A7A','#B08AB0'],stock:3},
+  {id:6,name:'Caramel Glow',desc_fr:'Nude dor&#233;, &#233;clat naturel hypnotisant',desc_en:'Golden nude, hypnotic natural glow',price:4000,icon:'&#x2728;',badge_fr:'Nouveau',badge_en:'New',tag:'nouveau',colors:['#C4813A','#A66020','#D4975A'],stock:7},
+  {id:7,name:'Plum Velvet',desc_fr:'Prune velout&#233;, sensuel et myst&#233;rieux',desc_en:'Velvety plum, sensual and mysterious',price:4000,icon:'&#x1F377;',badge_fr:'Bestseller',badge_en:'Bestseller',tag:'bestseller',colors:['#6B1F4A','#8B2060','#501540'],stock:2},
+  {id:8,name:'Peach Glow',desc_fr:'P&#234;che lumineux, doux et f&#233;minin',desc_en:'Luminous peach, soft and feminine',price:3500,oldPrice:4000,icon:'&#x1F351;',badge_fr:'Promo',badge_en:'Sale',tag:'promo',colors:['#FFAA7A','#E88A55','#FFCC99'],stock:9},
 ];
 
 const deliveryZones = {
-  abidjan_commune:{name:'Abidjan (proches)',price:1000,delay:'24h',free:10000},
-  abidjan_loin:{name:'Abidjan (éloignées)',price:1500,delay:'24-48h',free:15000},
-  bouake:{name:'Bouaké',price:3000,delay:'2-3 jours',free:null},
-  daloa:{name:'Daloa',price:3500,delay:'2-4 jours',free:null},
-  san_pedro:{name:'San-Pédro',price:3500,delay:'2-4 jours',free:null},
-  yamoussoukro:{name:'Yamoussoukro',price:2500,delay:'1-2 jours',free:null},
-  korhogo:{name:'Korhogo',price:4000,delay:'3-5 jours',free:null},
-  man:{name:'Man',price:4000,delay:'3-5 jours',free:null},
-  abengourou:{name:'Abengourou',price:3000,delay:'2-3 jours',free:null},
-  autres:{name:'Autres villes',price:4500,delay:'3-6 jours',free:null},
+  abidjan_commune:{name_fr:'Abidjan (proches)',name_en:'Abidjan (nearby)',price:1000,delay:'24h',free:10000},
+  abidjan_loin:{name_fr:'Abidjan (&#233;loign&#233;es)',name_en:'Abidjan (farther)',price:1500,delay:'24-48h',free:15000},
+  bouake:{name_fr:'Bouak&#233;',name_en:'Bouak&#233;',price:3000,delay:'2-3 jours',free:null},
+  daloa:{name_fr:'Daloa',name_en:'Daloa',price:3500,delay:'2-4 jours',free:null},
+  san_pedro:{name_fr:'San-P&#233;dro',name_en:'San-P&#233;dro',price:3500,delay:'2-4 jours',free:null},
+  yamoussoukro:{name_fr:'Yamoussoukro',name_en:'Yamoussoukro',price:2500,delay:'1-2 jours',free:null},
+  korhogo:{name_fr:'Korhogo',name_en:'Korhogo',price:4000,delay:'3-5 jours',free:null},
+  man:{name_fr:'Man',name_en:'Man',price:4000,delay:'3-5 jours',free:null},
+  abengourou:{name_fr:'Abengourou',name_en:'Abengourou',price:3000,delay:'2-3 jours',free:null},
+  autres:{name_fr:'Autres villes',name_en:'Other cities',price:4500,delay:'3-6 jours',free:null},
 };
 
-const promoCodes = {
-  'GLOSSY10':{discount:0.10,label:'-10%'},
-  'BEAUTY20':{discount:0.20,label:'-20%'},
-  'BIENVENUE':{discount:0.15,label:'-15%'},
-};
+const promoCodes = {'GLOSSY10':{discount:.10,label:'-10%'},'BEAUTY20':{discount:.20,label:'-20%'},'BIENVENUE':{discount:.15,label:'-15%'}};
 
-const faqs = [
-  {q:'Combien de temps le gloss tient-il ?',a:'Nos gloss tiennent en moyenne 4 à 6 heures. Avec une application renouvelée après les repas, vous profitez de lèvres brillantes toute la journée.'},
-  {q:'Quels sont les délais de livraison ?',a:'Pour Abidjan : 24 à 48h. Pour les autres villes de Côte d\'Ivoire : 2 à 5 jours ouvrables. Vous serez contactée sur WhatsApp dès l\'expédition.'},
-  {q:'Quels modes de paiement acceptez-vous ?',a:'Nous acceptons Wave, Orange Money, MTN Mobile Money, Moov Money et le paiement à la réception pour Abidjan.'},
-  {q:'Puis-je retourner un produit ?',a:'Si votre produit arrive endommagé ou ne correspond pas à votre commande, contactez-nous sur WhatsApp dans les 24h avec des photos. Nous trouverons une solution.'},
-  {q:'Comment utiliser un code promo ?',a:'Dans votre panier, entrez votre code promo dans le champ prévu et cliquez sur "Appliquer". La réduction sera calculée automatiquement sur votre total.'},
-  {q:'Les produits sont-ils testés dermatologiquement ?',a:'Oui ! Tous nos gloss sont formulés avec des ingrédients hydratants et testés pour convenir à tous les types de lèvres, y compris les peaux sensibles.'},
-];
-
-// ========== STATE ==========
+let lang = 'fr';
 let cart = [];
 let appliedPromo = null;
+let currentFilter = 'tous';
 const qtys = {};
-products.forEach(p => qtys[p.id] = 1);
+products.forEach(p => qtys[p.id]=1);
 
-// ========== PRODUCTS ==========
-function renderProducts(filter='tous') {
+function t(k,...a){ const v=T[lang][k]; return typeof v==='function'?v(...a):v||''; }
+
+// ===== APPLY TRANSLATIONS =====
+function applyLang() {
+  document.documentElement.lang = lang;
+  const ids = ['popupTitle','popupText','popupTimer','popupBtn','bannerText','bannerExpires',
+    'navShop','navPromo','navDelivery','navReviews','navCart',
+    'heroEyebrow','heroTitle','heroSub','heroCta1','heroCta2',
+    'shopLabel','shopTitle','ftAll','ftBest','ftNew','ftPromo',
+    'suggLabel','suggTitle','promoLabel','promoTitle','promoDesc','copyBtnText','promoExpires',
+    'timerH','timerM','timerS','delivLabel','delivTitle','delivCalcTitle','delivCalcDesc',
+    'optChooseCity','optAbidjanClose','optAbidjanFar','optOther','delivZonesTitle',
+    'reviewsLabel','reviewsTitle','r1','r2','r3','r4',
+    'aboutLabel','aboutTitle','aboutP1','aboutP2','stat1','stat2','stat3','faqLabel',
+    'nlTitle','nlDesc','nlBtn','footerDesc','footerShop','footerContact',
+    'footerAllGloss','footerBest','footerNew','footerPromo','footerDelivery','footerReviews',
+    'waTooltip','cartTitle','cartOrderBtn','promoApplyBtn',
+    'orderTitle','orderSummaryLabel','totalLabel',
+    'fLabelName','fLabelPhone','fLabelCity','fcityDefault','fcityAbjClose','fcityAbjFar','fcityOther',
+    'fLabelAddr','fLabelPayment','fpayDefault','fpayDelivery','orderConfirmBtn','successTitle','successDesc'
+  ];
+  ids.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=t(id); });
+  const nlInput = document.getElementById('newsletterEmail');
+  if(nlInput) nlInput.placeholder = t('nlPlaceholder');
+  const fname = document.getElementById('fname');
+  if(fname) fname.placeholder = t('fNamePh');
+  const faddress = document.getElementById('faddress');
+  if(faddress) faddress.placeholder = t('fAddrPh');
+  const promoInput = document.getElementById('promoInput');
+  if(promoInput) promoInput.placeholder = t('promoPlaceholder');
+  renderMarquee();
+  renderProducts(currentFilter);
+  renderFaq();
+  renderZones();
+  updateCartUI();
+  const cv = document.getElementById('deliveryCity');
+  if(cv && cv.value) calcDelivery();
+}
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btnFR').classList.toggle('active', l==='fr');
+  document.getElementById('btnEN').classList.toggle('active', l==='en');
+  applyLang();
+}
+
+// ===== MARQUEE =====
+function renderMarquee() {
+  const items = t('marquee');
+  const html = [...items,...items].map(s=>`<span>${s}</span><span class="dot">&#x2756;</span>`).join('');
+  document.getElementById('marqueeTrack').innerHTML = html;
+}
+
+// ===== PRODUCTS =====
+function renderProducts(filter) {
+  currentFilter = filter || 'tous';
   const grid = document.getElementById('productsGrid');
-  const list = filter==='tous' ? products : products.filter(p=>p.tag===filter);
-  grid.innerHTML = list.map(p => `
-    <div class="product-card">
-      <div class="product-img">
-        ${p.icon}
-        ${p.badge ? `<div class="product-badge ${p.tag==='promo'?'promo':''}">${p.badge}</div>` : ''}
-        ${p.stock<=3 ? `<div class="stock-badge">Plus que ${p.stock} !</div>` : ''}
+  const list = currentFilter==='tous' ? products : products.filter(p=>p.tag===currentFilter);
+  grid.innerHTML = list.map(p => {
+    const desc = lang==='en' ? p.desc_en : p.desc_fr;
+    const badge = lang==='en' ? p.badge_en : p.badge_fr;
+    return `<div class="product-card">
+      <div class="product-img">${p.icon}
+        ${badge?`<div class="product-badge ${p.tag==='promo'?'promo':''}">${badge}</div>`:''}
+        ${p.stock<=3?`<div class="stock-badge">${t('stockMsg',p.stock)}</div>`:''}
         <div class="product-overlay">
-          <button class="product-overlay-btn" onclick="addToCart(${p.id})">+ Ajouter au panier</button>
-          <button class="share-btn-small" onclick="shareProduct(${p.id})">📤 Partager</button>
+          <button class="product-overlay-btn" onclick="addToCart(${p.id})">${t('addToCart')}</button>
+          <button class="share-btn-small" onclick="shareProduct(${p.id})">${t('share')}</button>
         </div>
       </div>
       <div class="product-info">
         <div class="product-name">${p.name}</div>
-        <div class="product-desc">${p.desc}</div>
+        <div class="product-desc">${desc}</div>
         <div class="product-colors">${p.colors.map(c=>`<div class="color-dot" style="background:${c}"></div>`).join('')}</div>
         <div class="product-footer">
           <div>
@@ -746,15 +921,15 @@ function renderProducts(filter='tous') {
             ${p.oldPrice?`<span class="product-price-old">${p.oldPrice.toLocaleString('fr-FR')}</span>`:''}
           </div>
           <div class="qty-control">
-            <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+            <button class="qty-btn" onclick="changeQty(${p.id},-1)">&#x2212;</button>
             <span class="qty-num" id="qty-${p.id}">1</span>
             <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
           </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart(${p.id})">+ Ajouter au panier</button>
+        <button class="add-to-cart" onclick="addToCart(${p.id})">${t('addToCart')}</button>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
   updateSuggestions();
 }
 
@@ -765,7 +940,7 @@ function filterProducts(tag, btn) {
 }
 
 function changeQty(id, d) {
-  qtys[id] = Math.max(1, (qtys[id]||1)+d);
+  qtys[id] = Math.max(1,(qtys[id]||1)+d);
   const el = document.getElementById('qty-'+id);
   if(el) el.textContent = qtys[id];
 }
@@ -773,15 +948,14 @@ function changeQty(id, d) {
 function shareProduct(id) {
   const p = products.find(x=>x.id===id);
   const url = window.location.href;
-  const msg = `✨ Découvrez le ${p.name} chez Glossy Beauty ! ${p.price.toLocaleString('fr-FR')} FCFA seulement. Commander ici : ${url}`;
-  if(navigator.share) {
-    navigator.share({title:'Glossy Beauty',text:msg,url});
-  } else {
-    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
-  }
+  const msg = lang==='en'
+    ? `✨ Discover ${p.name} at Glossy Beauty! Only ${p.price.toLocaleString('fr-FR')} FCFA. Order: ${url}`
+    : `✨ Découvrez le ${p.name} chez Glossy Beauty ! ${p.price.toLocaleString('fr-FR')} FCFA seulement. Commander : ${url}`;
+  if(navigator.share) navigator.share({title:'Glossy Beauty',text:msg,url});
+  else window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-// ========== SUGGESTIONS ==========
+// ===== SUGGESTIONS =====
 function updateSuggestions() {
   const inCart = cart.map(i=>i.id);
   const sugg = products.filter(p=>!inCart.includes(p.id)).slice(0,4);
@@ -789,63 +963,50 @@ function updateSuggestions() {
   document.getElementById('suggestionsSection').style.display='block';
   document.getElementById('suggestionsGrid').innerHTML = sugg.map(p=>`
     <div class="product-card">
-      <div class="product-img" style="font-size:3rem">${p.icon}${p.badge?`<div class="product-badge ${p.tag==='promo'?'promo':''}">${p.badge}</div>`:''}</div>
+      <div class="product-img" style="font-size:3rem">${p.icon}${(lang==='en'?p.badge_en:p.badge_fr)?`<div class="product-badge ${p.tag==='promo'?'promo':''}">${lang==='en'?p.badge_en:p.badge_fr}</div>`:''}</div>
       <div class="product-info">
         <div class="product-name" style="font-size:.95rem">${p.name}</div>
         <div class="product-price" style="font-size:1.1rem;margin-bottom:10px">${p.price.toLocaleString('fr-FR')} FCFA</div>
-        <button class="add-to-cart" onclick="addToCart(${p.id})">+ Ajouter</button>
+        <button class="add-to-cart" onclick="addToCart(${p.id})">${t('addShort')}</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-// ========== CART ==========
+// ===== CART =====
 function addToCart(id) {
   const p = products.find(x=>x.id===id);
   const qty = qtys[id]||1;
   const ex = cart.find(i=>i.id===id);
   if(ex) ex.qty+=qty; else cart.push({...p,qty});
-  updateCartUI();
-  showToast(`${p.name} ajouté ! 💋`);
-  qtys[id]=1;
-  const el=document.getElementById('qty-'+id);
-  if(el) el.textContent=1;
+  updateCartUI(); showToast(t('toastAdded',p.name));
+  qtys[id]=1; const el=document.getElementById('qty-'+id); if(el) el.textContent=1;
   updateSuggestions();
 }
 
-function removeFromCart(id) {
-  cart=cart.filter(i=>i.id!==id);
-  updateCartUI();
-  updateSuggestions();
-}
+function removeFromCart(id) { cart=cart.filter(i=>i.id!==id); updateCartUI(); updateSuggestions(); }
 
 function applyPromo() {
   const code = document.getElementById('promoInput').value.trim().toUpperCase();
   const msg = document.getElementById('promoMsg');
   if(promoCodes[code]) {
-    appliedPromo = promoCodes[code];
-    appliedPromo.code = code;
-    msg.className='promo-msg ok';
-    msg.textContent=`✓ Code "${code}" appliqué ! ${appliedPromo.label} de réduction`;
-    updateCartUI();
-    showToast(`Code promo ${appliedPromo.label} appliqué ! 🎉`);
+    appliedPromo = {...promoCodes[code], code};
+    msg.className='promo-msg ok'; msg.innerHTML=t('promoOk',code,appliedPromo.label);
+    updateCartUI(); showToast(t('toastPromo',appliedPromo.label));
   } else {
-    msg.className='promo-msg err';
-    msg.textContent='Code invalide. Essayez GLOSSY10 😉';
-    appliedPromo=null;
-    updateCartUI();
+    msg.className='promo-msg err'; msg.innerHTML=t('promoErr');
+    appliedPromo=null; updateCartUI();
   }
 }
 
 function updateCartUI() {
   const count = cart.reduce((s,i)=>s+i.qty,0);
   const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const discount = appliedPromo ? Math.round(subtotal*appliedPromo.discount) : 0;
-  const total = subtotal - discount;
+  const discount = appliedPromo?Math.round(subtotal*appliedPromo.discount):0;
+  const total = subtotal-discount;
   document.getElementById('cartCount').textContent=count;
   const itemsEl=document.getElementById('cartItems');
   if(cart.length===0){
-    itemsEl.innerHTML='<p class="cart-empty">Votre panier est vide</p>';
+    itemsEl.innerHTML=`<p class="cart-empty">${t('cartEmpty')}</p>`;
   } else {
     itemsEl.innerHTML=cart.map(i=>`
       <div class="cart-item">
@@ -853,17 +1014,15 @@ function updateCartUI() {
         <div class="cart-item-info">
           <div class="cart-item-name">${i.name}</div>
           <div class="cart-item-price">${(i.price*i.qty).toLocaleString('fr-FR')} FCFA</div>
-          <div class="cart-item-qty">Qté : ${i.qty}</div>
+          <div class="cart-item-qty">${t('qtyLabel')} ${i.qty}</div>
         </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${i.id})">✕</button>
-      </div>
-    `).join('');
+        <button class="cart-item-remove" onclick="removeFromCart(${i.id})">&#x2715;</button>
+      </div>`).join('');
   }
   document.getElementById('cartTotalRows').innerHTML=`
-    <div class="cart-total-row"><span>Sous-total</span><span>${subtotal.toLocaleString('fr-FR')} FCFA</span></div>
-    ${discount>0?`<div class="cart-total-row" style="color:#25D366"><span>Réduction (${appliedPromo.label})</span><span>-${discount.toLocaleString('fr-FR')} FCFA</span></div>`:''}
-    <div class="cart-total-row main"><span>Total</span><span>${total.toLocaleString('fr-FR')} FCFA</span></div>
-  `;
+    <div class="cart-total-row"><span>${t('cartSubtotal')}</span><span>${subtotal.toLocaleString('fr-FR')} FCFA</span></div>
+    ${discount>0?`<div class="cart-total-row" style="color:#25D366"><span>${t('cartDiscount')} (${appliedPromo.label})</span><span>-${discount.toLocaleString('fr-FR')} FCFA</span></div>`:''}
+    <div class="cart-total-row main"><span>${t('cartTotal')}</span><span>${total.toLocaleString('fr-FR')} FCFA</span></div>`;
 }
 
 function toggleCart() {
@@ -871,15 +1030,15 @@ function toggleCart() {
   document.getElementById('cartSidebar').classList.toggle('open');
 }
 
-// ========== ORDER ==========
+// ===== ORDER =====
 function openOrder() {
-  if(cart.length===0){showToast('Votre panier est vide !');return;}
+  if(cart.length===0){showToast(t('toastEmpty'));return;}
   toggleCart();
   const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
   const discount=appliedPromo?Math.round(subtotal*appliedPromo.discount):0;
   const total=subtotal-discount;
-  document.getElementById('orderSummaryItems').innerHTML=cart.map(i=>`<div class="order-summary-item"><span>${i.name} ×${i.qty}</span><span>${(i.price*i.qty).toLocaleString('fr-FR')} FCFA</span></div>`).join('')
-    +(discount>0?`<div class="order-summary-item" style="color:#25D366"><span>Réduction ${appliedPromo.label}</span><span>-${discount.toLocaleString('fr-FR')} FCFA</span></div>`:'');
+  document.getElementById('orderSummaryItems').innerHTML=cart.map(i=>`<div class="order-summary-item"><span>${i.name} &#215;${i.qty}</span><span>${(i.price*i.qty).toLocaleString('fr-FR')} FCFA</span></div>`).join('')
+    +(discount>0?`<div class="order-summary-item" style="color:#25D366"><span>${t('cartDiscount')} ${appliedPromo.label}</span><span>-${discount.toLocaleString('fr-FR')} FCFA</span></div>`:'');
   document.getElementById('orderTotal').textContent=total.toLocaleString('fr-FR')+' FCFA';
   document.getElementById('orderBody').style.display='block';
   document.getElementById('successMsg').style.display='none';
@@ -894,30 +1053,29 @@ function placeOrder() {
   const city=document.getElementById('fcity').value;
   const address=document.getElementById('faddress').value.trim();
   const payment=document.getElementById('fpayment').value;
-  if(!name||!phone||!city||!payment){showToast('Veuillez remplir tous les champs !');return;}
+  if(!name||!phone||!city||!payment){showToast(t('toastFill'));return;}
   const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
   const discount=appliedPromo?Math.round(subtotal*appliedPromo.discount):0;
   const total=subtotal-discount;
-  const items=cart.map(i=>`• ${i.name} ×${i.qty} — ${(i.price*i.qty).toLocaleString('fr-FR')} FCFA`).join('\n');
-  const msg=`🛍 *NOUVELLE COMMANDE — Glossy Beauty*\n\n👤 *Nom :* ${name}\n📞 *WhatsApp :* ${phone}\n📍 *Ville :* ${city}\n🏠 *Adresse :* ${address||'Non précisée'}\n💳 *Paiement :* ${payment}\n${appliedPromo?`🎟 *Code promo :* ${appliedPromo.code} (${appliedPromo.label})\n`:''}\n🧾 *Produits :*\n${items}\n\n💰 *TOTAL : ${total.toLocaleString('fr-FR')} FCFA*\n\n_Via glossybeauty.com_`;
+  const items=cart.map(i=>`• ${i.name} x${i.qty} — ${(i.price*i.qty).toLocaleString('fr-FR')} FCFA`).join('\n');
+  const promoLine=appliedPromo?`🎟 ${lang==='en'?'Promo code':'Code promo'}: ${appliedPromo.code} (${appliedPromo.label})\n`:'';
+  const msg=T[lang].waMsg(name,phone,city,address,payment,promoLine,items,total.toLocaleString('fr-FR'));
   window.open(`https://wa.me/2250143159266?text=${encodeURIComponent(msg)}`,'_blank');
   document.getElementById('orderBody').style.display='none';
   document.getElementById('successMsg').style.display='block';
-  cart=[];appliedPromo=null;
-  updateCartUI();updateSuggestions();
+  cart=[];appliedPromo=null;updateCartUI();updateSuggestions();
 }
 
-// ========== DELIVERY ==========
+// ===== DELIVERY =====
 function renderZones() {
   document.getElementById('zoneList').innerHTML=Object.values(deliveryZones).map(z=>`
     <div class="zone-item">
-      <div><div class="zone-name">${z.name}</div><div class="zone-delay">⏱ ${z.delay}</div></div>
+      <div><div class="zone-name">${z['name_'+lang]}</div><div class="zone-delay">&#x23F1; ${t('zoneDelay',z.delay)}</div></div>
       <div style="text-align:right">
         <div class="zone-price">${z.price.toLocaleString('fr-FR')} FCFA</div>
-        ${z.free?`<div class="zone-free">Gratuit dès ${z.free.toLocaleString('fr-FR')}</div>`:''}
+        ${z.free?`<div class="zone-free">${t('zFreeFrom',z.free.toLocaleString('fr-FR'))}</div>`:''}
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function calcDelivery() {
@@ -926,122 +1084,88 @@ function calcDelivery() {
   if(!key){r.style.display='none';return;}
   const z=deliveryZones[key];
   const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const freeShipping=z.free&&subtotal>=z.free;
+  const free=z.free&&subtotal>=z.free;
   r.style.display='block';
   r.innerHTML=`
-    <div class="dr-city">📍 ${z.name}</div>
-    <div class="dr-row"><span>Délai de livraison</span><span>⏱ ${z.delay}</span></div>
-    <div class="dr-row"><span>Frais de livraison</span><span>${freeShipping?'<span style="color:#25D366">GRATUIT ✓</span>':z.price.toLocaleString('fr-FR')+' FCFA'}</span></div>
-    ${z.free?`<div class="dr-row"><span>Livraison gratuite dès</span><span>${z.free.toLocaleString('fr-FR')} FCFA d'achat</span></div>`:''}
-    <div class="dr-row"><span>Total estimé (panier actuel)</span><span>${(subtotal+(freeShipping?0:z.price)).toLocaleString('fr-FR')} FCFA</span></div>
-  `;
+    <div class="dr-city">&#x1F4CD; ${z['name_'+lang]}</div>
+    <div class="dr-row"><span>${t('drDelay')}</span><span>&#x23F1; ${t('zoneDelay',z.delay)}</span></div>
+    <div class="dr-row"><span>${t('drFees')}</span><span>${free?`<span style="color:#25D366">${t('drFreeLabel')}</span>`:z.price.toLocaleString('fr-FR')+' FCFA'}</span></div>
+    ${z.free?`<div class="dr-row"><span>${t('drFreeFrom')}</span><span>${z.free.toLocaleString('fr-FR')} FCFA ${t('drPurchase')}</span></div>`:''}
+    <div class="dr-row"><span>${t('drTotal')}</span><span>${(subtotal+(free?0:z.price)).toLocaleString('fr-FR')} FCFA</span></div>`;
 }
 
-// ========== FAQ ==========
+// ===== FAQ =====
 function renderFaq() {
-  document.getElementById('faqList').innerHTML=faqs.map((f,i)=>`
+  document.getElementById('faqList').innerHTML=t('faqs').map((f,i)=>`
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(${i},this)">${f.q}<span class="arrow">+</span></button>
       <div class="faq-a" id="faq-${i}">${f.a}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function toggleFaq(i,btn) {
   const a=document.getElementById('faq-'+i);
-  const isOpen=a.classList.contains('open');
+  const open=a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(e=>e.classList.remove('open'));
   document.querySelectorAll('.faq-q').forEach(e=>e.classList.remove('open'));
-  if(!isOpen){a.classList.add('open');btn.classList.add('open');}
+  if(!open){a.classList.add('open');btn.classList.add('open');}
 }
 
-// ========== PROMO TIMER ==========
+// ===== TIMER =====
 function startTimer() {
   let end = localStorage.getItem('glossyTimerEnd');
-  if(!end||Date.now()>parseInt(end)) {
-    end = Date.now() + 6*60*60*1000; // 6h
-    localStorage.setItem('glossyTimerEnd', end);
-  }
-  function tick() {
-    const diff = Math.max(0, parseInt(end)-Date.now());
-    const h=Math.floor(diff/3600000);
-    const m=Math.floor((diff%3600000)/60000);
-    const s=Math.floor((diff%60000)/1000);
+  if(!end||Date.now()>parseInt(end)){end=Date.now()+6*3600000;localStorage.setItem('glossyTimerEnd',end);}
+  function tick(){
+    const diff=Math.max(0,parseInt(end)-Date.now());
+    const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
     const pad=n=>String(n).padStart(2,'0');
-    ['ph','pm','ps'].forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.textContent=pad([h,m,s][i]); });
-    ['th','tm','ts'].forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.textContent=pad([h,m,s][i]); });
+    ['ph','pm','ps'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=pad([h,m,s][i]);});
+    ['th','tm','ts'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=pad([h,m,s][i]);});
   }
-  tick();
-  setInterval(tick,1000);
+  tick();setInterval(tick,1000);
 }
 
-// ========== POPUP ==========
+// ===== MISC =====
 function closePopup(){document.getElementById('popupOverlay').classList.remove('open')}
-
-// ========== COPY CODE ==========
-function copyCode(code) {
-  navigator.clipboard.writeText(code).catch(()=>{});
-  showToast(`Code ${code} copié ! 🎉`);
-}
-
-// ========== NEWSLETTER ==========
-function subscribeNewsletter() {
+function copyCode(code){navigator.clipboard.writeText(code).catch(()=>{});showToast(t('toastCopied',code));}
+function subscribeNewsletter(){
   const email=document.getElementById('newsletterEmail').value.trim();
-  if(!email||!email.includes('@')){showToast('Entrez un email valide !');return;}
-  showToast('Merci pour votre inscription ! 💋');
-  document.getElementById('newsletterEmail').value='';
+  if(!email||!email.includes('@')){showToast(t('toastEmailErr'));return;}
+  showToast(t('toastNewsletter'));document.getElementById('newsletterEmail').value='';
 }
-
-// ========== THEME ==========
-function toggleTheme() {
+function toggleTheme(){
   document.body.classList.toggle('light');
-  const btn=document.querySelector('.theme-btn');
-  btn.textContent=document.body.classList.contains('light')?'🌙':'☀️';
+  document.querySelector('.theme-btn').textContent=document.body.classList.contains('light')?'🌙':'☀️';
+}
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.innerHTML=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);
 }
 
-// ========== TOAST ==========
-function showToast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
-}
-
-// ========== CURSOR ==========
+// ===== CURSOR =====
 let mx=0,my=0,fx=0,fy=0;
 document.addEventListener('mousemove',e=>{
   mx=e.clientX;my=e.clientY;
   document.getElementById('cursor').style.cssText=`left:${mx-5}px;top:${my-5}px`;
 });
-(function animF(){
-  fx+=(mx-fx-16)*.12;fy+=(my-fy-16)*.12;
-  document.getElementById('follower').style.cssText=`left:${fx}px;top:${fy}px`;
-  requestAnimationFrame(animF);
-})();
+(function animF(){fx+=(mx-fx-16)*.12;fy+=(my-fy-16)*.12;document.getElementById('follower').style.cssText=`left:${fx}px;top:${fy}px`;requestAnimationFrame(animF);})();
 
-// ========== PARTICLES ==========
+// ===== PARTICLES =====
 (function(){
   const c=document.getElementById('particles');
   for(let i=0;i<18;i++){
-    const p=document.createElement('div');
-    p.className='particle';
+    const p=document.createElement('div');p.className='particle';
     const s=1+Math.random()*3;
     p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*12}s`;
     c.appendChild(p);
   }
 })();
 
-// ========== SCROLL ==========
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
-});
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
 
-// ========== REVEAL ==========
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:.1});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-// ========== INIT ==========
 window.addEventListener('load',()=>{
   setTimeout(()=>{
     document.getElementById('loader').classList.add('hide');
@@ -1049,9 +1173,8 @@ window.addEventListener('load',()=>{
   },2000);
 });
 
-renderProducts();
-renderFaq();
-renderZones();
+// ===== INIT =====
+applyLang();
 startTimer();
 updateCartUI();
 </script>
