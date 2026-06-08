@@ -556,7 +556,7 @@ footer{padding:60px}
       <li><a href="#promo" id="footerPromo"></a></li>
     </ul></div>
     <div class="footer-col"><h4 id="footerContact"></h4><ul>
-      <li><a href="https://wa.me/2250143159266" target="_blank">WhatsApp</a></li>
+      <li><a href="https://wa.me/2250759591454" target="_blank">WhatsApp</a></li>
       <li><a href="#livraison" id="footerDelivery"></a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#avis" id="footerReviews"></a></li>
@@ -564,11 +564,11 @@ footer{padding:60px}
   </div>
   <div class="footer-bottom">
     <p>&#169; 2026 Glossy Beauty &#183; Abidjan, C&#244;te d&#x27;Ivoire</p>
-    <div class="social-links"><a href="https://wa.me/2250143159266" target="_blank">WhatsApp</a><a href="#">Instagram</a><a href="#">TikTok</a></div>
+    <div class="social-links"><a href="https://wa.me/2250759591454" target="_blank">WhatsApp</a><a href="#">Instagram</a><a href="#">TikTok</a></div>
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/2250143159266" target="_blank">&#x1F4AC;<span class="wa-tooltip" id="waTooltip"></span></a>
+<a class="wa-float" href="https://wa.me/2250759591454" target="_blank">&#x1F4AC;<span class="wa-tooltip" id="waTooltip"></span></a>
 
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
@@ -609,14 +609,24 @@ footer{padding:60px}
       </div>
       <div class="form-group"><label id="fLabelAddr"></label><textarea id="faddress"></textarea></div>
       <div class="form-group"><label id="fLabelPayment"></label>
-        <select id="fpayment">
-          <option value="" id="fpayDefault"></option>
-          <option value="Wave">&#x1F499; Wave</option>
-          <option value="Orange Money">&#x1F7E0; Orange Money</option>
-          <option value="MTN Mobile Money">&#x1F49B; MTN Mobile Money</option>
-          <option value="Moov Money">&#x1F535; Moov Money</option>
-          <option value="Paiement &#224; la r&#233;ception" id="fpayDelivery"></option>
-        </select>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+  <button type="button" onclick="selectPay(this,'Wave')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
+    <img src="image/wave.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Wave
+  </button>
+  <button type="button" onclick="selectPay(this,'Orange Money')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
+    <img src="image/Orange.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Orange
+  </button>
+  <button type="button" onclick="selectPay(this,'MTN Mobile Money')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
+    <img src="image/Mtn.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Mtn 
+  </button>
+  <button type="button" onclick="selectPay(this,'Moov Money')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
+    <img src="image/Moov.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Moov
+  </button>
+  <button type="button" onclick="selectPay(this,'Paiement à la réception')" style="grid-column:1/-1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
+    <img src="image/Paiement à la livraison.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Paiement à la livraison
+  </button>
+</div>
+<input type="hidden" id="fpayment" value="">
       </div>
       <button class="btn-primary" style="width:100%;border:none;cursor:none;font-size:.7rem;margin-top:6px;" onclick="placeOrder()"><span id="orderConfirmBtn"></span></button>
     </div>
@@ -717,7 +727,7 @@ const T = {
     qtyLabel:'Qt&#233;&#160;:',
     zoneDelay: d => d,
     waMsg: (name,phone,city,addr,payment,promoLine,items,total) =>
-      `&#x1F6CD; *NOUVELLE COMMANDE &#8212; Glossy Beauty*\n\n&#x1F464; *Nom :* ${name}\n&#x1F4DE; *WhatsApp :* ${phone}\n&#x1F4CD; *Ville :* ${city}\n&#x1F3E0; *Adresse :* ${addr||'Non pr&#233;cis&#233;e'}\n&#x1F4B3; *Paiement :* ${payment}\n${promoLine}\n&#x1F9FE; *Produits :*\n${items}\n\n&#x1F4B0; *TOTAL : ${total} FCFA*\n\n_Via glossybeauty.com_`
+      `🛍️ *NOUVELLE COMMANDE — Glossy Beauty*\n\n👤 *Nom :* ${name}\n📞 *WhatsApp :* ${phone}\n📍 *Ville :* ${city}\n🏠 *Adresse :* ${addr||'Non précisée'}\n💳 *Paiement :* ${payment}\n${promoLine}\n🧾 *Produits commandés :*\n${items}\n\n💰 *TOTAL : ${total} FCFA*\n\n_Commande passée via Glossy Beauty_`
   },
   en: {
     popupTitle: 'Welcome to <em>Glossy Beauty</em>',
@@ -803,7 +813,7 @@ const T = {
     qtyLabel:'Qty:',
     zoneDelay: d => d.replace('jours','days').replace('jour','day'),
     waMsg: (name,phone,city,addr,payment,promoLine,items,total) =>
-      `&#x1F6CD; *NEW ORDER &#8212; Glossy Beauty*\n\n&#x1F464; *Name:* ${name}\n&#x1F4DE; *WhatsApp:* ${phone}\n&#x1F4CD; *City:* ${city}\n&#x1F3E0; *Address:* ${addr||'Not specified'}\n&#x1F4B3; *Payment:* ${payment}\n${promoLine}\n&#x1F9FE; *Products:*\n${items}\n\n&#x1F4B0; *TOTAL: ${total} FCFA*\n\n_Via glossybeauty.com_`
+      `🛍️ *NEW ORDER — Glossy Beauty*\n\n👤 *Name:* ${name}\n📞 *WhatsApp:* ${phone}\n📍 *City:* ${city}\n🏠 *Address:* ${addr||'Not specified'}\n💳 *Payment:* ${payment}\n${promoLine}\n🧾 *Products ordered:*\n${items}\n\n💰 *TOTAL: ${total} FCFA*\n\n_Order placed via Glossy Beauty_`
   }
 };
 
@@ -1060,7 +1070,7 @@ function placeOrder() {
   const items=cart.map(i=>`• ${i.name} x${i.qty} — ${(i.price*i.qty).toLocaleString('fr-FR')} FCFA`).join('\n');
   const promoLine=appliedPromo?`🎟 ${lang==='en'?'Promo code':'Code promo'}: ${appliedPromo.code} (${appliedPromo.label})\n`:'';
   const msg=T[lang].waMsg(name,phone,city,address,payment,promoLine,items,total.toLocaleString('fr-FR'));
-  window.open(`https://wa.me/2250143159266?text=${encodeURIComponent(msg)}`,'_blank');
+  window.open(`https://wa.me/2250759591454?text=${encodeURIComponent(msg)}`,'_blank');
   document.getElementById('orderBody').style.display='none';
   document.getElementById('successMsg').style.display='block';
   cart=[];appliedPromo=null;updateCartUI();updateSuggestions();
@@ -1173,6 +1183,16 @@ window.addEventListener('load',()=>{
   },2000);
 });
 
+// ===== SELECT PAYMENT =====
+function selectPay(btn, value) {
+  document.querySelectorAll('[onclick^="selectPay"]').forEach(b => {
+    b.style.borderColor = 'rgba(255,255,255,.1)';
+    b.style.background = 'rgba(255,255,255,.04)';
+  });
+  btn.style.borderColor = '#C0001A';
+  btn.style.background = 'rgba(192,0,26,.15)';
+  document.getElementById('fpayment').value = value;
+}
 // ===== INIT =====
 applyLang();
 startTimer();
