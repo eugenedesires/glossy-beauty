@@ -2,49 +2,53 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Glossy Beauty — Gloss & Lèvres</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{--black:#0a0a0a;--deep-red:#8B0000;--red:#C0001A;--gold:#C9A84C;--white:#f5f0ee;--gray:#1e1e1e;--gray2:#2a2a2a}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;overflow-x:hidden;cursor:none}
+body{background:var(--black);color:var(--white);font-family:'Montserrat',system-ui,sans-serif;overflow-x:hidden}
+ 
+/* ===== LOADER ===== */
 .loader{position:fixed;inset:0;background:var(--black);z-index:9000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity .8s,visibility .8s}
-.loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader.hide{opacity:0;visibility:hidden;pointer-events:none;display:none!important}
 .loader-logo{font-family:'Playfair Display',serif;font-size:2.5rem;letter-spacing:4px;animation:pulse 1.2s ease infinite}
 .loader-logo span{color:var(--red);font-style:italic}
 .loader-bar{width:200px;height:1px;background:rgba(255,255,255,.1);overflow:hidden}
 .loader-progress{height:100%;background:var(--red);animation:load 1.8s ease forwards}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes load{from{width:0}to{width:100%}}
-.cursor{width:10px;height:10px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference}
-.cursor-follower{width:32px;height:32px;border:1px solid rgba(200,0,26,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:all .15s ease}
-@media(hover:none),(pointer:coarse){body{cursor:auto}.cursor,.cursor-follower{display:none!important}*{cursor:auto!important}}
-
-/* LANG SWITCHER */
+ 
+/* ===== LANG SWITCHER ===== */
 .lang-switcher{display:flex;align-items:center;border:1px solid rgba(200,0,26,.4);overflow:hidden;border-radius:2px}
-.lang-btn{background:none;border:none;color:rgba(245,240,238,.45);cursor:none;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:2px;padding:6px 11px;transition:all .25s;font-weight:600;text-transform:uppercase}
+.lang-btn{background:none;border:none;color:rgba(245,240,238,.45);cursor:pointer;font-family:'Montserrat',system-ui,sans-serif;font-size:.62rem;letter-spacing:2px;padding:6px 11px;transition:all .25s;font-weight:600;text-transform:uppercase}
 .lang-btn.active{background:var(--red);color:var(--white)}
 .lang-btn:not(.active):hover{color:var(--red)}
 .lang-sep{width:1px;background:rgba(200,0,26,.3);height:12px;align-self:center}
-
+ 
+/* ===== POPUP ===== */
 .popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:800;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
 .popup-overlay.open{opacity:1;pointer-events:all}
 .popup{background:#111;border:1px solid rgba(200,0,26,.3);max-width:460px;width:100%;text-align:center;padding:50px 40px;position:relative;animation:popIn .4s ease forwards}
 @keyframes popIn{from{transform:scale(.9)}to{transform:scale(1)}}
-.popup-close{position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(245,240,238,.4);font-size:1.3rem;cursor:none;transition:color .2s}
+.popup-close{position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(245,240,238,.4);font-size:1.3rem;cursor:pointer;transition:color .2s}
 .popup-close:hover{color:var(--white)}
 .popup-emoji{font-size:3rem;margin-bottom:12px}
 .popup h2{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:8px}
 .popup h2 em{font-style:italic;color:var(--red)}
 .popup p{color:rgba(245,240,238,.55);font-size:.82rem;line-height:1.7;margin-bottom:24px}
-.popup-code{background:rgba(200,0,26,.12);border:1px dashed var(--red);padding:12px 24px;font-size:1.1rem;letter-spacing:4px;font-weight:700;color:var(--red);margin-bottom:24px;cursor:none}
+.popup-code{background:rgba(200,0,26,.12);border:1px dashed var(--red);padding:12px 24px;font-size:1.1rem;letter-spacing:4px;font-weight:700;color:var(--red);margin-bottom:24px;cursor:pointer}
 .popup-timer{font-size:.65rem;color:rgba(245,240,238,.4);letter-spacing:2px;margin-bottom:20px}
-.promo-banner{background:var(--red);padding:10px;text-align:center;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;justify-content:center;gap:20px}
+ 
+/* ===== PROMO BANNER ===== */
+.promo-banner{background:var(--red);padding:10px;text-align:center;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
 .promo-banner span{color:rgba(255,255,255,.7)}
 .promo-countdown{display:inline-flex;gap:6px;align-items:center;font-weight:700}
 .promo-countdown .unit{background:rgba(0,0,0,.25);padding:2px 6px;border-radius:2px}
+ 
+/* ===== NAV ===== */
 nav{position:fixed;top:0;width:100%;z-index:100;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,0,26,.1);transition:padding .3s}
 nav.scrolled{padding:12px 60px}
 .nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;letter-spacing:2px;color:var(--white);text-decoration:none}
@@ -53,13 +57,26 @@ nav.scrolled{padding:12px 60px}
 .nav-links a{color:rgba(245,240,238,.6);text-decoration:none;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;transition:color .3s}
 .nav-links a:hover{color:var(--red)}
 .nav-right{display:flex;align-items:center;gap:10px}
-.theme-btn{background:none;border:1px solid rgba(255,255,255,.1);color:rgba(245,240,238,.5);width:34px;height:34px;cursor:none;font-size:.9rem;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.theme-btn{background:none;border:1px solid rgba(255,255,255,.1);color:rgba(245,240,238,.5);width:34px;height:34px;cursor:pointer;font-size:.9rem;transition:all .3s;display:flex;align-items:center;justify-content:center}
 .theme-btn:hover{border-color:var(--red);color:var(--red)}
-.cart-btn{background:none;border:1px solid rgba(200,0,26,.35);color:var(--white);cursor:none;font-family:'Montserrat',sans-serif;font-size:.7rem;letter-spacing:1px;padding:8px 16px;transition:all .3s;display:flex;align-items:center;gap:8px}
+.cart-btn{background:none;border:1px solid rgba(200,0,26,.35);color:var(--white);cursor:pointer;font-family:'Montserrat',system-ui,sans-serif;font-size:.7rem;letter-spacing:1px;padding:8px 16px;transition:all .3s;display:flex;align-items:center;gap:8px}
 .cart-btn:hover{border-color:var(--red);color:var(--red)}
 .cart-count{background:var(--red);color:var(--white);border-radius:50%;width:18px;height:18px;font-size:.58rem;display:flex;align-items:center;justify-content:center;font-weight:700}
-
-/* LIGHT MODE */
+ 
+/* ===== HAMBURGER ===== */
+.hamburger{display:none;background:none;border:1px solid rgba(255,255,255,.15);color:var(--white);width:40px;height:40px;cursor:pointer;font-size:1.1rem;align-items:center;justify-content:center;transition:border-color .2s}
+.hamburger:hover{border-color:var(--red)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,.98);z-index:99;flex-direction:column;padding:80px 28px 40px;gap:0;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-menu-close{position:absolute;top:18px;right:20px;background:none;border:none;color:var(--white);font-size:1.6rem;cursor:pointer;opacity:.5;transition:opacity .2s}
+.mobile-menu-close:hover{opacity:1}
+.mobile-nav-links{list-style:none;margin-bottom:32px}
+.mobile-nav-links li{border-bottom:1px solid rgba(255,255,255,.06)}
+.mobile-nav-links a{display:block;color:rgba(245,240,238,.75);text-decoration:none;font-size:.8rem;letter-spacing:4px;text-transform:uppercase;padding:18px 0;transition:color .2s}
+.mobile-nav-links a:hover{color:var(--red)}
+.mobile-menu-extras{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+ 
+/* ===== LIGHT MODE ===== */
 body.light{background:#fdf8f5;color:#1a1a1a}
 body.light nav{background:rgba(253,248,245,.97);border-bottom:1px solid rgba(200,0,26,.15)}
 body.light .nav-links a{color:rgba(26,26,26,.65)}
@@ -141,7 +158,16 @@ body.light .popup h2{color:#1a1a1a}
 body.light .popup p{color:rgba(26,26,26,.55)}
 body.light .popup-timer{color:rgba(26,26,26,.4)}
 body.light .popup-close{color:rgba(26,26,26,.3)}
-
+body.light .mobile-menu{background:rgba(253,248,245,.99)}
+body.light .mobile-nav-links a{color:rgba(26,26,26,.75)}
+body.light .mobile-nav-links li{border-color:rgba(26,26,26,.08)}
+body.light .mobile-menu-extras{border-color:rgba(26,26,26,.08)}
+body.light .mobile-menu-close{color:#1a1a1a}
+body.light .hamburger{border-color:rgba(26,26,26,.2);color:#1a1a1a}
+body.light .pay-method-btn{background:rgba(26,26,26,.03);border-color:rgba(26,26,26,.1);color:#1a1a1a}
+body.light .pay-method-btn.selected{border-color:var(--red);background:rgba(200,0,26,.06)}
+ 
+/* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:130px 60px 80px}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 65% 50%,rgba(139,0,0,.18) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 15% 80%,rgba(200,0,26,.07) 0%,transparent 60%)}
 .hero-particles{position:absolute;inset:0;overflow:hidden}
@@ -154,36 +180,44 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,8vw,7rem);line-height:.95;font-weight:700;margin-bottom:16px}
 .hero-title em{font-style:italic;color:var(--red);display:block}
 .hero-sub{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;color:rgba(245,240,238,.55);margin-bottom:48px;letter-spacing:1px}
-.hero-cta{display:inline-flex;gap:20px;flex-wrap:wrap}
-.btn-primary{padding:15px 38px;background:var(--red);color:var(--white);text-decoration:none;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;position:relative;overflow:hidden;transition:all .3s;display:inline-block;border:none;cursor:none}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{padding:15px 38px;background:var(--red);color:var(--white);text-decoration:none;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;position:relative;overflow:hidden;transition:all .3s;display:inline-block;border:none;cursor:pointer}
 .btn-primary::before{content:'';position:absolute;inset:0;background:var(--deep-red);transform:translateX(-100%);transition:transform .3s ease}
 .btn-primary:hover::before{transform:translateX(0)}
 .btn-primary span{position:relative;z-index:1}
 .btn-outline{padding:15px 38px;border:1px solid rgba(245,240,238,.3);color:var(--white);text-decoration:none;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all .3s;display:inline-block}
 .btn-outline:hover{border-color:var(--red);color:var(--red)}
+ 
+/* ===== MARQUEE ===== */
 .marquee-wrap{overflow:hidden;border-top:1px solid rgba(200,0,26,.15);border-bottom:1px solid rgba(200,0,26,.15);padding:14px 0;background:rgba(139,0,0,.04)}
 .marquee-track{display:flex;animation:marquee 22s linear infinite;white-space:nowrap}
 .marquee-track span{font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:rgba(245,240,238,.35);padding:0 36px}
 .marquee-track span.dot{color:var(--red);padding:0;font-size:.9rem}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+ 
+/* ===== SECTIONS ===== */
 .section{padding:100px 60px}
 .section-label{font-size:.58rem;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:12px}
 .section-label::before{content:'';width:28px;height:1px;background:var(--red)}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:14px}
 .section-title em{font-style:italic;color:var(--red)}
+ 
+/* ===== FILTER TABS ===== */
 .filter-tabs{display:flex;gap:4px;margin:40px 0 0;flex-wrap:wrap}
-.filter-tab{padding:10px 22px;background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(245,240,238,.5);font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .3s}
+.filter-tab{padding:10px 22px;background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(245,240,238,.5);font-family:'Montserrat',system-ui,sans-serif;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .filter-tab.active,.filter-tab:hover{background:var(--red);border-color:var(--red);color:var(--white)}
+ 
+/* ===== PRODUCTS GRID ===== */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px;margin-top:22px}
-.product-card{background:var(--gray);position:relative;overflow:hidden;cursor:none;transition:transform .4s ease}
+.product-card{background:var(--gray);position:relative;overflow:hidden;cursor:pointer;transition:transform .4s ease}
 .product-card:hover{transform:translateY(-6px)}
 .product-card:hover .product-overlay{opacity:1}
 .product-img{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#1a0808 0%,#2d0808 50%,#1a0808 100%);display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;overflow:hidden}
 .product-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,0,26,.2),transparent 70%)}
 .product-overlay{position:absolute;inset:0;background:rgba(192,0,26,.88);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;flex-direction:column;gap:10px}
-.product-overlay-btn{color:white;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;border:1px solid white;padding:11px 22px;cursor:none;transition:all .2s;background:transparent;font-family:'Montserrat',sans-serif}
+.product-overlay-btn{color:white;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;font-weight:600;border:1px solid white;padding:11px 22px;cursor:pointer;transition:all .2s;background:transparent;font-family:'Montserrat',sans-serif}
 .product-overlay-btn:hover{background:white;color:var(--red)}
-.share-btn-small{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:white;font-size:.58rem;letter-spacing:2px;padding:7px 16px;cursor:none;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
+.share-btn-small{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:white;font-size:.58rem;letter-spacing:2px;padding:7px 16px;cursor:pointer;font-family:'Montserrat',system-ui,sans-serif;text-transform:uppercase;transition:all .2s}
 .share-btn-small:hover{background:white;color:var(--red)}
 .product-badge{position:absolute;top:14px;left:14px;background:var(--red);color:var(--white);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;font-weight:700;z-index:2}
 .product-badge.promo{background:var(--gold);color:#1a1a1a}
@@ -192,37 +226,43 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .product-name{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:5px}
 .product-desc{font-size:.7rem;color:rgba(245,240,238,.45);margin-bottom:10px;line-height:1.6}
 .product-colors{display:flex;gap:6px;margin-bottom:14px}
-.color-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.2);cursor:none;transition:transform .2s}
+.color-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.2);cursor:pointer;transition:transform .2s}
 .color-dot:hover{transform:scale(1.4)}
 .product-footer{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .product-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--red)}
 .product-price-old{font-size:.78rem;color:rgba(245,240,238,.3);text-decoration:line-through;margin-left:6px}
 .qty-control{display:flex;align-items:center;gap:8px}
-.qty-btn{width:26px;height:26px;background:transparent;border:1px solid rgba(200,0,26,.3);color:var(--white);cursor:none;font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.qty-btn{width:26px;height:26px;background:transparent;border:1px solid rgba(200,0,26,.3);color:var(--white);cursor:pointer;font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center}
 .qty-btn:hover{background:var(--red);border-color:var(--red)}
 .qty-num{font-size:.85rem;min-width:16px;text-align:center}
-.add-to-cart{width:100%;padding:10px;background:transparent;border:1px solid rgba(200,0,26,.35);color:var(--red);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .3s;font-family:'Montserrat',sans-serif;font-weight:600}
+.add-to-cart{width:100%;padding:10px;background:transparent;border:1px solid rgba(200,0,26,.35);color:var(--red);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;font-family:'Montserrat',system-ui,sans-serif;font-weight:600;min-height:44px}
 .add-to-cart:hover{background:var(--red);color:var(--white);border-color:var(--red)}
+ 
+/* ===== SUGGESTIONS ===== */
 .suggestions-section{padding:60px;background:var(--gray)}
 .suggestions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px;margin-top:24px}
+ 
+/* ===== PROMO SECTION ===== */
 .promo-section{background:linear-gradient(135deg,var(--deep-red) 0%,#3a0000 100%);padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .promo-left h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:12px}
 .promo-left h2 em{font-style:italic}
 .promo-left p{color:rgba(245,240,238,.6);font-size:.85rem;line-height:1.8;margin-bottom:24px}
 .promo-code-box{background:rgba(0,0,0,.3);border:1px dashed rgba(255,255,255,.3);padding:20px 28px;display:inline-flex;align-items:center;gap:20px;margin-bottom:24px}
 .promo-code-text{font-size:1.3rem;letter-spacing:6px;font-weight:700;color:var(--gold)}
-.copy-btn{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:6px 14px;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .3s;font-family:'Montserrat',sans-serif}
+.copy-btn{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:6px 14px;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;font-family:'Montserrat',sans-serif}
 .copy-btn:hover{background:white;color:var(--red);border-color:white}
-.promo-timer-big{display:flex;gap:12px}
+.promo-timer-big{display:flex;gap:12px;flex-wrap:wrap}
 .timer-unit{text-align:center;background:rgba(0,0,0,.4);padding:14px 18px;min-width:70px}
 .timer-num{font-family:'Playfair Display',serif;font-size:2rem;display:block;color:var(--gold)}
 .timer-label{font-size:.5rem;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,238,.4);margin-top:4px;display:block}
 .promo-right{text-align:center;font-size:8rem}
+ 
+/* ===== DELIVERY ===== */
 .delivery-section{background:var(--gray)}
 .delivery-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:50px;align-items:start}
 .delivery-form{background:rgba(200,0,26,.05);border:1px solid rgba(200,0,26,.15);padding:36px}
 .delivery-form h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:24px}
-.delivery-select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--white);padding:14px 16px;font-family:'Montserrat',sans-serif;font-size:.82rem;outline:none;cursor:none;-webkit-appearance:none;margin-bottom:16px;transition:border-color .3s}
+.delivery-select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--white);padding:14px 16px;font-family:'Montserrat',system-ui,sans-serif;font-size:.82rem;outline:none;cursor:pointer;-webkit-appearance:none;margin-bottom:16px;transition:border-color .3s;min-height:48px}
 .delivery-select:focus{border-color:var(--red)}
 .delivery-select option{background:#1a1a1a}
 .delivery-result{display:none;background:rgba(200,0,26,.08);border:1px solid rgba(200,0,26,.2);padding:24px;margin-top:16px;animation:fadeIn .4s ease}
@@ -239,6 +279,8 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .zone-delay{font-size:.68rem;color:rgba(245,240,238,.4);letter-spacing:1px}
 .zone-price{color:var(--red);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500}
 .zone-free{color:#25D366;font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+ 
+/* ===== TESTIMONIALS ===== */
 .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:2px;margin-top:50px}
 .testimonial-card{background:var(--gray);padding:30px;position:relative}
 .testimonial-card::before{content:'"';font-family:'Playfair Display',serif;font-size:5rem;color:var(--red);opacity:.15;position:absolute;top:8px;left:18px;line-height:1}
@@ -248,6 +290,8 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .author-avatar{width:36px;height:36px;border-radius:50%;background:var(--deep-red);display:flex;align-items:center;justify-content:center;font-size:1rem}
 .author-name{font-size:.75rem;font-weight:600}
 .author-city{font-size:.6rem;color:rgba(245,240,238,.4);letter-spacing:1px;margin-top:2px}
+ 
+/* ===== ABOUT ===== */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
 .about-visual{position:relative;aspect-ratio:4/5;background:linear-gradient(135deg,#1a0505 0%,#2d0a0a 100%);display:flex;align-items:center;justify-content:center;font-size:8rem;overflow:hidden}
 .about-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,0,26,.25),transparent 70%)}
@@ -256,35 +300,43 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;padding-top:36px;border-top:1px solid rgba(200,0,26,.12)}
 .stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--red);display:block;margin-bottom:4px}
 .stat-label{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,238,.35)}
+ 
+/* ===== FAQ ===== */
 .faq-section{background:var(--gray)}
 .faq-list{margin-top:50px;max-width:720px}
 .faq-item{border-bottom:1px solid rgba(200,0,26,.1)}
-.faq-q{width:100%;background:none;border:none;color:var(--white);font-family:'Playfair Display',serif;font-size:1rem;text-align:left;padding:20px 0;cursor:none;display:flex;justify-content:space-between;align-items:center;transition:color .3s}
+.faq-q{width:100%;background:none;border:none;color:var(--white);font-family:'Playfair Display',serif;font-size:1rem;text-align:left;padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .3s;min-height:60px}
 .faq-q:hover{color:var(--red)}
 .faq-q .arrow{font-size:1.2rem;transition:transform .3s;color:var(--red)}
 .faq-q.open .arrow{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:.83rem;line-height:1.8;color:rgba(245,240,238,.5)}
 .faq-a.open{max-height:300px;padding-bottom:18px}
+ 
+/* ===== NEWSLETTER ===== */
 .newsletter-section{background:linear-gradient(135deg,var(--deep-red) 0%,#4a0000 100%);padding:80px 60px;text-align:center}
 .newsletter-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:12px}
 .newsletter-section p{color:rgba(255,255,255,.6);font-size:.83rem;margin-bottom:32px}
 .newsletter-form{display:flex;max-width:440px;margin:0 auto}
-.newsletter-input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-right:none;color:white;padding:14px 18px;font-family:'Montserrat',sans-serif;font-size:.8rem;outline:none}
+.newsletter-input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-right:none;color:white;padding:14px 18px;font-family:'Montserrat',system-ui,sans-serif;font-size:.8rem;outline:none;min-height:50px}
 .newsletter-input::placeholder{color:rgba(255,255,255,.4)}
-.newsletter-btn{background:var(--black);color:white;border:none;padding:14px 22px;font-family:'Montserrat',sans-serif;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;cursor:none;font-weight:600}
+.newsletter-btn{background:var(--black);color:white;border:none;padding:14px 22px;font-family:'Montserrat',system-ui,sans-serif;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600;min-height:50px}
 .newsletter-btn:hover{background:#1a1a1a}
-.wa-float{position:fixed;bottom:32px;right:32px;z-index:500;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s;animation:bounce 2s ease infinite}
+ 
+/* ===== WHATSAPP FLOAT ===== */
+.wa-float{position:fixed;bottom:max(32px, env(safe-area-inset-bottom, 0px) + 16px);right:20px;z-index:500;background:#25D366;color:white;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s,box-shadow .3s;animation:bounce 2s ease infinite}
 .wa-float:hover{transform:scale(1.1);animation:none;box-shadow:0 8px 30px rgba(37,211,102,.6)}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .wa-tooltip{position:absolute;right:68px;background:#25D366;color:white;padding:6px 14px;border-radius:4px;font-size:.68rem;white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none}
 .wa-float:hover .wa-tooltip{opacity:1}
+ 
+/* ===== CART ===== */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
 .cart-overlay.open{opacity:1;pointer-events:all}
 .cart-sidebar{position:fixed;top:0;right:0;bottom:0;width:400px;background:#111;z-index:201;transform:translateX(100%);transition:transform .4s cubic-bezier(.77,0,.175,1);display:flex;flex-direction:column;border-left:1px solid rgba(200,0,26,.15)}
 .cart-sidebar.open{transform:translateX(0)}
 .cart-header{padding:26px 26px 18px;border-bottom:1px solid rgba(200,0,26,.1);display:flex;justify-content:space-between;align-items:center}
 .cart-header h3{font-family:'Playfair Display',serif;font-size:1.2rem}
-.cart-close{background:none;border:none;color:var(--white);font-size:1.4rem;cursor:none;opacity:.45;transition:opacity .2s}
+.cart-close{background:none;border:none;color:var(--white);font-size:1.4rem;cursor:pointer;opacity:.45;transition:opacity .2s;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
 .cart-close:hover{opacity:1}
 .cart-items{flex:1;overflow-y:auto;padding:14px 26px}
 .cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);animation:slideIn .3s ease}
@@ -294,13 +346,13 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .cart-item-name{font-family:'Playfair Display',serif;font-size:.9rem;margin-bottom:3px}
 .cart-item-price{color:var(--red);font-size:.83rem}
 .cart-item-qty{font-size:.68rem;color:rgba(245,240,238,.35);margin-top:2px}
-.cart-item-remove{background:none;border:none;color:rgba(245,240,238,.2);cursor:none;font-size:.95rem;transition:color .2s;align-self:center}
+.cart-item-remove{background:none;border:none;color:rgba(245,240,238,.2);cursor:pointer;font-size:.95rem;transition:color .2s;align-self:center;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
 .cart-item-remove:hover{color:var(--red)}
 .cart-footer{padding:18px 26px;border-top:1px solid rgba(200,0,26,.1)}
 .promo-input-wrap{display:flex;gap:0;margin-bottom:14px}
-.promo-input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-right:none;color:var(--white);padding:10px 14px;font-family:'Montserrat',sans-serif;font-size:.75rem;outline:none}
+.promo-input{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-right:none;color:var(--white);padding:10px 14px;font-family:'Montserrat',system-ui,sans-serif;font-size:.75rem;outline:none;min-height:44px}
 .promo-input:focus{border-color:var(--red)}
-.promo-apply{background:var(--red);border:none;color:white;padding:10px 16px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;cursor:none;font-family:'Montserrat',sans-serif;font-weight:600;transition:background .2s}
+.promo-apply{background:var(--red);border:none;color:white;padding:10px 16px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',system-ui,sans-serif;font-weight:600;transition:background .2s;min-height:44px}
 .promo-apply:hover{background:var(--deep-red)}
 .promo-msg{font-size:.68rem;margin-bottom:10px;min-height:18px}
 .promo-msg.ok{color:#25D366}
@@ -310,6 +362,8 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .cart-total-row.main{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--white);margin-top:8px;padding-top:8px;border-top:1px solid rgba(200,0,26,.12)}
 .cart-total-row.main span:last-child{color:var(--red)}
 .cart-empty{color:rgba(245,240,238,.25);font-size:.78rem;text-align:center;padding:50px 0}
+ 
+/* ===== MODAL ===== */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:20px}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:#111;border:1px solid rgba(200,0,26,.22);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:scale(.92);transition:transform .3s ease}
@@ -319,7 +373,7 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .modal-body{padding:26px}
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:.57rem;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,238,.4);margin-bottom:7px}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--white);padding:12px 14px;font-family:'Montserrat',sans-serif;font-size:.8rem;transition:border-color .3s;outline:none;-webkit-appearance:none}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--white);padding:12px 14px;font-family:'Montserrat',system-ui,sans-serif;font-size:.8rem;transition:border-color .3s;outline:none;-webkit-appearance:none;min-height:48px}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red);background:rgba(200,0,26,.04)}
 .form-group select option{background:#111}
 .form-group textarea{resize:vertical;min-height:70px}
@@ -331,6 +385,15 @@ body.light .popup-close{color:rgba(26,26,26,.3)}
 .success-msg .check{font-size:3rem;margin-bottom:14px}
 .success-msg h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:8px}
 .success-msg p{color:rgba(245,240,238,.45);font-size:.8rem;line-height:1.7}
+ 
+/* ===== PAYMENT BUTTONS ===== */
+.pay-method-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:.8rem;font-weight:600;transition:all .25s;width:100%;text-align:left;min-height:52px;font-family:'Montserrat',system-ui,sans-serif}
+.pay-method-btn:hover{border-color:rgba(200,0,26,.5);background:rgba(200,0,26,.08)}
+.pay-method-btn.selected{border-color:var(--red);background:rgba(200,0,26,.15)}
+.pay-method-btn img{width:30px;height:30px;border-radius:6px;object-fit:cover;flex-shrink:0}
+.pay-methods-list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+ 
+/* ===== FOOTER ===== */
 footer{padding:60px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:50px}
 .footer-brand .footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:14px}
@@ -344,33 +407,150 @@ footer{padding:60px}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid rgba(255,255,255,.05);flex-wrap:wrap;gap:12px}
 .footer-bottom p{font-size:.63rem;color:rgba(245,240,238,.22);letter-spacing:1px}
 .social-links{display:flex;gap:16px}
-.social-links a{color:rgba(245,240,238,.32);text-decoration:none;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s}
+.social-links a{color:rgba(245,240,238,.32);text-decoration:none;font-size:.63rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;min-height:44px;display:flex;align-items:center}
 .social-links a:hover{color:var(--red)}
-.toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--red);color:var(--white);padding:12px 24px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;z-index:5000;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap}
+ 
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--red);color:var(--white);padding:12px 24px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;z-index:5000;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
 .toast.show{transform:translateX(-50%) translateY(0)}
+ 
+/* ===== REVEAL ===== */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
+ 
+/* ============================================================
+   MOBILE OVERRIDES — ≤ 900px
+   ============================================================ */
 @media(max-width:900px){
+ 
+  /* --- NAV --- */
   nav{padding:14px 18px}
+  nav.scrolled{padding:10px 18px}
   .nav-links{display:none}
-  .hero,.section{padding:80px 18px 60px}
-  .promo-section,.delivery-grid,.about-grid,.footer-grid{grid-template-columns:1fr;gap:36px}
-  .cart-sidebar{width:100%}
-  footer{padding:40px 18px}
-  .newsletter-section{padding:60px 18px}
-  .newsletter-form{flex-direction:column}
-  .newsletter-input{border-right:1px solid rgba(255,255,255,.2)}
-  .promo-section{padding:60px 18px}
+  .nav-right .lang-switcher,
+  .nav-right .theme-btn{display:none}
+  .hamburger{display:flex}
+ 
+  /* --- HERO --- */
+  .hero{padding:90px 20px 60px;min-height:auto}
+  .hero-title{font-size:clamp(2.6rem,10vw,4rem)}
+  .hero-sub{font-size:1rem;margin-bottom:32px}
+  .hero-eyebrow{font-size:.55rem;letter-spacing:4px}
+  .hero-cta{flex-direction:column;gap:12px}
+  .btn-primary,.btn-outline{width:100%;text-align:center;padding:16px 20px;font-size:.65rem}
+ 
+  /* --- MARQUEE --- */
+  .marquee-track span{font-size:.55rem;padding:0 20px}
+ 
+  /* --- SECTIONS --- */
+  .section{padding:60px 20px}
+ 
+  /* --- FILTER TABS --- */
+  .filter-tabs{gap:6px;margin:28px 0 0}
+  .filter-tab{padding:10px 16px;font-size:.58rem;min-height:44px}
+ 
+  /* --- PRODUCTS GRID → horizontal cards --- */
+  .products-grid{grid-template-columns:1fr;gap:10px;margin-top:18px}
+  .product-card{display:flex;flex-direction:row;transform:none!important}
+  .product-card:hover{transform:none!important}
+  .product-card .product-img{width:110px;min-width:110px;aspect-ratio:auto;min-height:130px;font-size:3rem}
+  .product-card .product-overlay{display:none}
+  .product-card .product-info{padding:14px 16px;flex:1;display:flex;flex-direction:column;justify-content:center;border-top:none;border-left:1px solid rgba(200,0,26,.1)}
+  .product-card .product-name{font-size:.95rem;margin-bottom:4px}
+  .product-card .product-desc{font-size:.68rem;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .product-card .product-colors{margin-bottom:10px;gap:5px}
+  .product-card .color-dot{width:12px;height:12px}
+  .product-card .product-footer{margin-bottom:8px}
+  .product-card .product-price{font-size:1.15rem}
+  .product-card .add-to-cart{font-size:.58rem;padding:9px 10px;min-height:40px}
+  .product-badge{top:10px;left:10px;font-size:.48rem;padding:3px 7px}
+  .stock-badge{top:10px;right:10px;font-size:.45rem}
+  .qty-btn{width:30px;height:30px;min-width:30px}
+ 
+  /* --- SUGGESTIONS --- */
+  .suggestions-section{padding:40px 20px}
+  .suggestions-grid{grid-template-columns:repeat(2,1fr)}
+ 
+  /* --- PROMO --- */
+  .promo-section{grid-template-columns:1fr;gap:32px;padding:50px 20px}
+  .promo-right{font-size:5rem;text-align:left}
+  .promo-code-box{flex-direction:column;align-items:flex-start;gap:12px;padding:16px 20px}
+  .promo-code-text{font-size:1.1rem}
+  .timer-unit{padding:10px 14px;min-width:60px}
+  .timer-num{font-size:1.5rem}
+ 
+  /* --- DELIVERY --- */
+  .delivery-grid{grid-template-columns:1fr;gap:24px;margin-top:32px}
+  .delivery-form,.delivery-map{padding:24px 20px}
+  .delivery-select{font-size:.78rem;padding:14px 12px}
+ 
+  /* --- TESTIMONIALS --- */
+  .testimonials-grid{grid-template-columns:1fr;gap:12px;margin-top:32px}
+  .testimonial-card{padding:24px 22px}
+ 
+  /* --- ABOUT --- */
+  .about-grid{grid-template-columns:1fr;gap:36px;margin-top:36px}
+  .about-visual{aspect-ratio:2/1;font-size:5rem}
+  .about-stats{grid-template-columns:repeat(3,1fr);gap:16px}
+  .stat-num{font-size:1.5rem}
+ 
+  /* --- FAQ --- */
+  .faq-list{margin-top:32px}
+  .faq-q{font-size:.92rem;padding:16px 0}
+ 
+  /* --- NEWSLETTER --- */
+  .newsletter-section{padding:50px 20px}
+  .newsletter-form{flex-direction:column;gap:0}
+  .newsletter-input{border-right:1px solid rgba(255,255,255,.2);border-bottom:none;min-height:52px}
+  .newsletter-btn{min-height:52px;border-top:none}
+ 
+  /* --- CART SIDEBAR --- */
+  .cart-sidebar{width:100%;max-width:100%}
+  .cart-header{padding:18px 18px 14px}
+  .cart-items{padding:10px 18px}
+  .cart-footer{padding:14px 18px}
+ 
+  /* --- ORDER MODAL --- */
+  .modal{max-height:95vh}
+  .modal-header{padding:18px 18px 14px}
+  .modal-body{padding:18px}
+  .pay-methods-list{gap:10px}
+  .pay-method-btn{min-height:56px;font-size:.78rem;padding:14px}
+  .pay-method-btn img{width:32px;height:32px}
+ 
+  /* --- FOOTER --- */
+  footer{padding:40px 20px}
+  .footer-grid{grid-template-columns:1fr;gap:32px;margin-bottom:32px}
+  .footer-brand p{max-width:100%}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:16px}
+ 
+  /* --- TOAST --- */
+  .toast{bottom:max(80px, env(safe-area-inset-bottom,0px) + 60px);font-size:.65rem;padding:10px 18px}
+ 
+  /* --- WA FLOAT --- */
+  .wa-float{width:50px;height:50px;font-size:1.3rem;right:16px}
+  .wa-tooltip{display:none}
+}
+ 
+/* ===== SMALL PHONES ≤ 420px ===== */
+@media(max-width:420px){
+  .hero-title{font-size:2.4rem}
+  .promo-timer-big{gap:8px}
+  .timer-unit{min-width:52px;padding:8px 10px}
+  .timer-num{font-size:1.3rem}
+  .about-stats{grid-template-columns:1fr 1fr;gap:14px}
+  .filter-tab{padding:9px 13px;font-size:.55rem}
 }
 </style>
 </head>
 <body>
-
+<script>document.addEventListener('DOMContentLoaded',function(){document.getElementById('loader').style.display='none';applyLang();startTimer();updateCartUI();});</script>
+ 
 <div class="loader" id="loader">
   <div class="loader-logo"><span>Glossy</span> Beauty</div>
   <div class="loader-bar"><div class="loader-progress"></div></div>
 </div>
-
+ 
 <div class="popup-overlay" id="popupOverlay">
   <div class="popup">
     <button class="popup-close" onclick="closePopup()">&#x2715;</button>
@@ -382,10 +562,7 @@ footer{padding:60px}
     <button class="btn-primary" onclick="closePopup()"><span id="popupBtn"></span></button>
   </div>
 </div>
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="follower"></div>
-
+ 
 <div class="promo-banner">
   &#x1F381; <span id="bannerText"></span>
   <span id="bannerExpires"></span>
@@ -395,7 +572,27 @@ footer{padding:60px}
     <span class="unit" id="ps">00</span>s
   </span>
 </div>
-
+ 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">&#x2715;</button>
+  <ul class="mobile-nav-links">
+    <li><a href="#produits" onclick="toggleMobileMenu()" id="mNavShop"></a></li>
+    <li><a href="#promo" onclick="toggleMobileMenu()" id="mNavPromo"></a></li>
+    <li><a href="#livraison" onclick="toggleMobileMenu()" id="mNavDelivery"></a></li>
+    <li><a href="#avis" onclick="toggleMobileMenu()" id="mNavReviews"></a></li>
+    <li><a href="#faq" onclick="toggleMobileMenu()">FAQ</a></li>
+  </ul>
+  <div class="mobile-menu-extras">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="mBtnFR" onclick="setLang('fr')">FR</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" id="mBtnEN" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">&#x2600;&#xFE0F;</button>
+  </div>
+</div>
+ 
 <nav id="navbar">
   <a href="#" class="nav-logo"><span>Glossy</span> Beauty</a>
   <ul class="nav-links">
@@ -413,9 +610,10 @@ footer{padding:60px}
     </div>
     <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">&#x2600;&#xFE0F;</button>
     <button class="cart-btn" onclick="toggleCart()">&#x1F6CD; <span id="navCart"></span> <span class="cart-count" id="cartCount">0</span></button>
+    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
   </div>
 </nav>
-
+ 
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-particles" id="particles"></div>
@@ -429,11 +627,11 @@ footer{padding:60px}
     </div>
   </div>
 </section>
-
+ 
 <div class="marquee-wrap">
   <div class="marquee-track" id="marqueeTrack"></div>
 </div>
-
+ 
 <section class="section" id="produits">
   <div class="section-label reveal" id="shopLabel"></div>
   <h2 class="section-title reveal" id="shopTitle"></h2>
@@ -445,13 +643,13 @@ footer{padding:60px}
   </div>
   <div class="products-grid" id="productsGrid"></div>
 </section>
-
+ 
 <div class="suggestions-section" id="suggestionsSection" style="display:none">
   <div class="section-label" id="suggLabel"></div>
   <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:0" id="suggTitle"></h3>
   <div class="suggestions-grid" id="suggestionsGrid"></div>
 </div>
-
+ 
 <section class="promo-section" id="promo">
   <div class="promo-left">
     <div class="section-label" style="margin-bottom:14px" id="promoLabel"></div>
@@ -470,7 +668,7 @@ footer{padding:60px}
   </div>
   <div class="promo-right">&#x1F381;</div>
 </section>
-
+ 
 <section class="section delivery-section" id="livraison">
   <div class="section-label reveal" id="delivLabel"></div>
   <h2 class="section-title reveal" id="delivTitle"></h2>
@@ -499,7 +697,7 @@ footer{padding:60px}
     </div>
   </div>
 </section>
-
+ 
 <section class="section" id="avis" style="background:linear-gradient(180deg,#0a0a0a 0%,#110303 50%,#0a0a0a 100%)">
   <div class="section-label reveal" id="reviewsLabel"></div>
   <h2 class="section-title reveal" id="reviewsTitle"></h2>
@@ -510,7 +708,7 @@ footer{padding:60px}
     <div class="testimonial-card reveal"><div class="stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2606;</div><p class="testimonial-text" id="r4"></p><div class="testimonial-author"><div class="author-avatar">&#x1F9D5;&#x1F3FE;</div><div><div class="author-name">Mariam T.</div><div class="author-city">Bouak&#233;</div></div></div></div>
   </div>
 </section>
-
+ 
 <section class="section" id="apropos">
   <div class="about-grid">
     <div class="about-visual reveal">&#x1F484;<div class="about-visual-border"></div></div>
@@ -527,13 +725,13 @@ footer{padding:60px}
     </div>
   </div>
 </section>
-
+ 
 <section class="section faq-section" id="faq">
   <div class="section-label reveal" id="faqLabel"></div>
   <h2 class="section-title reveal">FAQ</h2>
   <div class="faq-list" id="faqList"></div>
 </section>
-
+ 
 <div class="newsletter-section">
   <h2 id="nlTitle"></h2>
   <p id="nlDesc"></p>
@@ -542,7 +740,7 @@ footer{padding:60px}
     <button class="newsletter-btn" onclick="subscribeNewsletter()" id="nlBtn"></button>
   </div>
 </div>
-
+ 
 <footer id="contact">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -556,7 +754,7 @@ footer{padding:60px}
       <li><a href="#promo" id="footerPromo"></a></li>
     </ul></div>
     <div class="footer-col"><h4 id="footerContact"></h4><ul>
-      <li><a href="https://wa.me/2250759591454" target="_blank">WhatsApp</a></li>
+      <li><a href="https://wa.me/2250143159266" target="_blank">WhatsApp</a></li>
       <li><a href="#livraison" id="footerDelivery"></a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#avis" id="footerReviews"></a></li>
@@ -564,12 +762,12 @@ footer{padding:60px}
   </div>
   <div class="footer-bottom">
     <p>&#169; 2026 Glossy Beauty &#183; Abidjan, C&#244;te d&#x27;Ivoire</p>
-    <div class="social-links"><a href="https://wa.me/2250759591454" target="_blank">WhatsApp</a><a href="#">Instagram</a><a href="#">TikTok</a></div>
+    <div class="social-links"><a href="https://wa.me/2250143159266" target="_blank">WhatsApp</a><a href="#">Instagram</a><a href="#">TikTok</a></div>
   </div>
 </footer>
-
-<a class="wa-float" href="https://wa.me/2250759591454" target="_blank">&#x1F4AC;<span class="wa-tooltip" id="waTooltip"></span></a>
-
+ 
+<a class="wa-float" href="https://wa.me/2250143159266" target="_blank">&#x1F4AC;<span class="wa-tooltip" id="waTooltip"></span></a>
+ 
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
   <div class="cart-header"><h3 id="cartTitle"></h3><button class="cart-close" onclick="toggleCart()">&#x2715;</button></div>
@@ -581,10 +779,10 @@ footer{padding:60px}
     </div>
     <div class="promo-msg" id="promoMsg"></div>
     <div class="cart-total-rows" id="cartTotalRows"></div>
-    <button class="btn-primary" style="width:100%;text-align:center;border:none;cursor:none;" onclick="openOrder()"><span id="cartOrderBtn"></span></button>
+    <button class="btn-primary" style="width:100%;text-align:center;border:none;" onclick="openOrder()"><span id="cartOrderBtn"></span></button>
   </div>
 </div>
-
+ 
 <div class="modal-overlay" id="orderModal">
   <div class="modal">
     <div class="modal-header"><h3 id="orderTitle"></h3><button class="cart-close" onclick="closeOrder()">&#x2715;</button></div>
@@ -608,27 +806,28 @@ footer{padding:60px}
         </select>
       </div>
       <div class="form-group"><label id="fLabelAddr"></label><textarea id="faddress"></textarea></div>
-      <div class="form-group"><label id="fLabelPayment"></label>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
-  <button type="button" onclick="selectPay(this,'Wave')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
-    <img src="wave.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Wave
-  </button>
-  <button type="button" onclick="selectPay(this,'Orange Money')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
-    <img src="Orange.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Orange
-  </button>
-  <button type="button" onclick="selectPay(this,'MTN Mobile Money')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
-    <img src="Mtn.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Mtn 
-  </button>
-  <button type="button" onclick="selectPay(this,'Moov Money')" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
-    <img src="Moov.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Moov
-  </button>
-  <button type="button" onclick="selectPay(this,'Paiement à la réception')" style="grid-column:1/-1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:white;padding:12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600">
-    <img src="Paiement-livraison.jpg" style="width:26px;height:26px;border-radius:4px;object-fit:cover"> Paiement à la livraison
-  </button>
-</div>
-<input type="hidden" id="fpayment" value="">
+      <div class="form-group">
+        <label id="fLabelPayment"></label>
+        <div class="pay-methods-list">
+          <button type="button" class="pay-method-btn" onclick="selectPay(this,'Wave')">
+            <img src="wave.jpg" alt="Wave"> Wave
+          </button>
+          <button type="button" class="pay-method-btn" onclick="selectPay(this,'Orange Money')">
+            <img src="orange.jpg" alt="Orange Money"> Orange Money
+          </button>
+          <button type="button" class="pay-method-btn" onclick="selectPay(this,'MTN Mobile Money')">
+            <img src="mtn.jpg" alt="MTN"> MTN Mobile Money
+          </button>
+          <button type="button" class="pay-method-btn" onclick="selectPay(this,'Moov Money')">
+            <img src="moov.jpg" alt="Moov"> Moov Money
+          </button>
+          <button type="button" class="pay-method-btn" onclick="selectPay(this,'Paiement à la réception')">
+            <img src="paiement-livraison.jpg" alt="Livraison"> <span id="fpayDelivery"></span>
+          </button>
+        </div>
+        <input type="hidden" id="fpayment" value="">
       </div>
-      <button class="btn-primary" style="width:100%;border:none;cursor:none;font-size:.7rem;margin-top:6px;" onclick="placeOrder()"><span id="orderConfirmBtn"></span></button>
+      <button class="btn-primary" style="width:100%;border:none;font-size:.7rem;margin-top:6px;" onclick="placeOrder()"><span id="orderConfirmBtn"></span></button>
     </div>
     <div class="success-msg" id="successMsg">
       <div class="check">&#x1F48B;</div>
@@ -637,54 +836,53 @@ footer{padding:60px}
     </div>
   </div>
 </div>
-
+ 
 <div class="toast" id="toast"></div>
-
+ 
 <script>
-// ===== TRANSLATIONS =====
 const T = {
   fr: {
-    popupTitle: 'Bienvenue chez <em>Glossy Beauty</em>',
-    popupText: 'Profitez de <strong>-10% sur votre premi&#232;re commande</strong> avec le code exclusif&#160;:',
-    popupTimer: 'Offre valable pour les nouvelles clientes uniquement',
-    popupBtn: '&#x2728; D&#233;couvrir la boutique',
-    bannerText: 'Livraison gratuite Abidjan d&#232;s 10&#160;000 FCFA',
-    bannerExpires: '&#183; Offre expire dans&#160;:',
-    navShop:'Boutique', navPromo:'Promos', navDelivery:'Livraison', navReviews:'Avis', navCart:'Panier',
+    popupTitle:'Bienvenue chez <em>Glossy Beauty</em>',
+    popupText:'Profitez de <strong>-10% sur votre premi&#232;re commande</strong> avec le code exclusif&#160;:',
+    popupTimer:'Offre valable pour les nouvelles clientes uniquement',
+    popupBtn:'&#x2728; D&#233;couvrir la boutique',
+    bannerText:'Livraison gratuite Abidjan d&#232;s 10&#160;000 FCFA',
+    bannerExpires:'&#183; Offre expire dans&#160;:',
+    navShop:'Boutique',navPromo:'Promos',navDelivery:'Livraison',navReviews:'Avis',navCart:'Panier',
     heroEyebrow:'Collection Signature 2026',
     heroTitle:'L&#232;vres<br><em>Irr&#233;sistibles</em>',
     heroSub:'Gloss de luxe pour un &#233;clat naturel et sensuel',
-    heroCta1:'&#x2756; D&#233;couvrir la collection', heroCta2:'Zones de livraison',
+    heroCta1:'&#x2756; D&#233;couvrir la collection',heroCta2:'Zones de livraison',
     marquee:['Gloss Longue Tenue','Formule Hydratante','15 Teintes Exclusives','Livraison Rapide','Qualit&#233; Premium','500+ Clientes'],
-    shopLabel:'Notre Collection', shopTitle:'Nos <em>Gloss</em>',
-    ftAll:'Tous', ftBest:'Bestsellers', ftNew:'Nouveaut&#233;s', ftPromo:'Promos',
-    suggLabel:'Vous aimerez aussi', suggTitle:'Produits <em>Similaires</em>',
-    addToCart:'+ Ajouter au panier', addShort:'+ Ajouter', share:'&#x1F4E4; Partager',
-    stockMsg: n => `Plus que ${n}&#160;!`,
+    shopLabel:'Notre Collection',shopTitle:'Nos <em>Gloss</em>',
+    ftAll:'Tous',ftBest:'Bestsellers',ftNew:'Nouveaut&#233;s',ftPromo:'Promos',
+    suggLabel:'Vous aimerez aussi',suggTitle:'Produits <em>Similaires</em>',
+    addToCart:'+ Ajouter au panier',addShort:'+ Ajouter',share:'&#x1F4E4; Partager',
+    stockMsg:n=>`Plus que ${n}&#160;!`,
     promoLabel:'Offre Sp&#233;ciale',
     promoTitle:'&#201;conomisez <em>10%</em><br>d&#232;s maintenant',
     promoDesc:"Utilisez ce code exclusif lors de votre commande pour b&#233;n&#233;ficier d'une r&#233;duction imm&#233;diate sur toute la boutique.",
-    copyBtn:'Copier', promoExpires:'&#x23F3; Cette offre expire dans&#160;:',
-    timerH:'Heures', timerM:'Minutes', timerS:'Secondes',
-    delivLabel:'Exp&#233;dition', delivTitle:'Calculateur de <em>Livraison</em>',
+    copyBtn:'Copier',promoExpires:'&#x23F3; Cette offre expire dans&#160;:',
+    timerH:'Heures',timerM:'Minutes',timerS:'Secondes',
+    delivLabel:'Exp&#233;dition',delivTitle:'Calculateur de <em>Livraison</em>',
     delivCalcTitle:'&#x1F69A; Calculer les frais',
     delivCalcDesc:'S&#233;lectionnez votre ville pour conna&#238;tre les frais et d&#233;lais de livraison.',
     optChooseCity:'-- Choisir votre ville --',
-    optAbidjanClose:'Abidjan (Communes proches)', optAbidjanFar:'Abidjan (Communes &#233;loign&#233;es)', optOther:'Autres villes',
+    optAbidjanClose:'Abidjan (Communes proches)',optAbidjanFar:'Abidjan (Communes &#233;loign&#233;es)',optOther:'Autres villes',
     delivZonesTitle:'&#x1F4CD; Toutes les zones',
-    zFreeFrom: n => `Gratuit d&#232;s ${n}`,
-    drDelay:'D&#233;lai de livraison', drFees:'Frais de livraison',
-    drFreeFrom:'Livraison gratuite d&#232;s', drFreeLabel:'GRATUIT &#x2713;', drPurchase:"d'achat",
+    zFreeFrom:n=>`Gratuit d&#232;s ${n}`,
+    drDelay:'D&#233;lai de livraison',drFees:'Frais de livraison',
+    drFreeFrom:'Livraison gratuite d&#232;s',drFreeLabel:'GRATUIT &#x2713;',drPurchase:"d'achat",
     drTotal:'Total estim&#233; (panier actuel)',
-    reviewsLabel:"Ce qu'elles disent", reviewsTitle:'Avis <em>Clientes</em>',
+    reviewsLabel:"Ce qu'elles disent",reviewsTitle:'Avis <em>Clientes</em>',
     r1:"Ce gloss tient toute la journ&#233;e&#160;! Je ne pars plus jamais sans mon Cherry Kiss. Vraiment top qualit&#233;.",
     r2:"Livraison rapide, produit conforme. Le Rose Nude est exactement ce que je cherchais. Je recommande&#160;!",
     r3:"J'ai command&#233; 3 teintes et je suis satisfaite &#224; 100&#160;%. Les l&#232;vres restent hydrat&#233;es et le brillant est magnifique.",
     r4:"Super produit&#160;! Le Berry Glam est parfait pour les soir&#233;es. J'attends d&#233;j&#224; la prochaine collection.",
-    aboutLabel:'Notre Histoire', aboutTitle:'La beaut&#233;,<br><em>r&#233;invent&#233;e</em>',
+    aboutLabel:'Notre Histoire',aboutTitle:'La beaut&#233;,<br><em>r&#233;invent&#233;e</em>',
     aboutP1:"Chez Glossy Beauty, chaque gloss est une invitation &#224; vous sentir belle, confiante et lumineuse. Nos formules sont soigneusement &#233;labor&#233;es pour nourrir vos l&#232;vres tout en leur offrant un &#233;clat irr&#233;sistible.",
     aboutP2:"Des teintes soigneusement s&#233;lectionn&#233;es, une texture l&#233;g&#232;re et confortable &#8212; parce que vous m&#233;ritez le meilleur.",
-    stat1:'Teintes', stat2:'Clientes', stat3:'Qualit&#233;',
+    stat1:'Teintes',stat2:'Clientes',stat3:'Qualit&#233;',
     faqLabel:'Questions fr&#233;quentes',
     faqs:[
       {q:'Combien de temps le gloss tient-il&#160;?',a:'Nos gloss tiennent en moyenne 4 &#224; 6 heures. Avec une application renouvel&#233;e apr&#232;s les repas, vous profitez de l&#232;vres brillantes toute la journ&#233;e.'},
@@ -696,81 +894,81 @@ const T = {
     ],
     nlTitle:'Restez <em>Brillante</em> &#x1F48B;',
     nlDesc:"Inscrivez-vous pour recevoir les nouvelles collections et offres exclusives en avant-premi&#232;re",
-    nlPlaceholder:'Votre adresse email...', nlBtn:"S'inscrire",
+    nlPlaceholder:'Votre adresse email...',nlBtn:"S'inscrire",
     footerDesc:"Votre beaut&#233; est notre passion. Des gloss de qualit&#233; premium pour sublimer vos l&#232;vres au quotidien.",
-    footerShop:'Boutique', footerContact:'Contact',
-    footerAllGloss:'Tous les gloss', footerBest:'Bestsellers', footerNew:'Nouveaut&#233;s', footerPromo:'Promos',
-    footerDelivery:'Livraison', footerReviews:'Avis',
+    footerShop:'Boutique',footerContact:'Contact',
+    footerAllGloss:'Tous les gloss',footerBest:'Bestsellers',footerNew:'Nouveaut&#233;s',footerPromo:'Promos',
+    footerDelivery:'Livraison',footerReviews:'Avis',
     waTooltip:'Contactez-nous',
-    cartTitle:'Mon Panier', cartEmpty:'Votre panier est vide',
-    cartSubtotal:'Sous-total', cartDiscount:'R&#233;duction', cartTotal:'Total',
+    cartTitle:'Mon Panier',cartEmpty:'Votre panier est vide',
+    cartSubtotal:'Sous-total',cartDiscount:'R&#233;duction',cartTotal:'Total',
     cartOrderBtn:'&#x2713; Commander',
-    promoPlaceholder:'Code promo...', promoApplyBtn:'Appliquer',
-    promoOk: (code,label) => `&#x2713; Code "${code}" appliqu&#233;&#160;! ${label} de r&#233;duction`,
+    promoPlaceholder:'Code promo...',promoApplyBtn:'Appliquer',
+    promoOk:(code,label)=>`&#x2713; Code "${code}" appliqu&#233;&#160;! ${label} de r&#233;duction`,
     promoErr:"Code invalide. Essayez GLOSSY10 &#x1F609;",
-    orderTitle:'Finaliser la commande', orderSummaryLabel:'R&#233;capitulatif', totalLabel:'Total',
-    fLabelName:'Nom complet', fNamePh:'Votre nom et pr&#233;nom',
-    fLabelPhone:'Num&#233;ro WhatsApp', fLabelCity:'Ville de livraison',
+    orderTitle:'Finaliser la commande',orderSummaryLabel:'R&#233;capitulatif',totalLabel:'Total',
+    fLabelName:'Nom complet',fNamePh:'Votre nom et pr&#233;nom',
+    fLabelPhone:'Num&#233;ro WhatsApp',fLabelCity:'Ville de livraison',
     fcityDefault:'Choisir votre ville',
-    fcityAbjClose:'Abidjan - Communes proches', fcityAbjFar:'Abidjan - Communes &#233;loign&#233;es', fcityOther:'Autre ville',
-    fLabelAddr:'Adresse compl&#232;te', fAddrPh:'Quartier, rue, description...',
-    fLabelPayment:'Mode de paiement', fpayDefault:'Choisir un mode de paiement',
-    fpayDelivery:'&#x1F91D; Paiement &#224; la r&#233;ception',
+    fcityAbjClose:'Abidjan - Communes proches',fcityAbjFar:'Abidjan - Communes &#233;loign&#233;es',fcityOther:'Autre ville',
+    fLabelAddr:'Adresse compl&#232;te',fAddrPh:'Quartier, rue, description...',
+    fLabelPayment:'Mode de paiement',
+    fpayDelivery:'Paiement &#224; la r&#233;ception',
     orderConfirmBtn:'&#x1F48B; Confirmer la commande',
     successTitle:'Commande confirm&#233;e&#160;!',
     successDesc:"WhatsApp va s'ouvrir pour envoyer votre commande.<br>Vous serez contact&#233;e tr&#232;s bient&#244;t pour confirmer la livraison. &#x2728;",
-    toastAdded: n => `${n} ajout&#233;&#160;! &#x1F48B;`,
-    toastCopied: c => `Code ${c} copi&#233;&#160;! &#x1F389;`,
-    toastPromo: l => `Code promo ${l} appliqu&#233;&#160;! &#x1F389;`,
-    toastEmpty:'Votre panier est vide&#160;!', toastFill:'Veuillez remplir tous les champs&#160;!',
-    toastEmailErr:'Entrez un email valide&#160;!', toastNewsletter:'Merci pour votre inscription&#160;! &#x1F48B;',
+    toastAdded:n=>`${n} ajout&#233;&#160;! &#x1F48B;`,
+    toastCopied:c=>`Code ${c} copi&#233;&#160;! &#x1F389;`,
+    toastPromo:l=>`Code promo ${l} appliqu&#233;&#160;! &#x1F389;`,
+    toastEmpty:'Votre panier est vide&#160;!',toastFill:'Veuillez remplir tous les champs&#160;!',
+    toastEmailErr:'Entrez un email valide&#160;!',toastNewsletter:'Merci pour votre inscription&#160;! &#x1F48B;',
     qtyLabel:'Qt&#233;&#160;:',
-    zoneDelay: d => d,
-    waMsg: (name,phone,city,addr,payment,promoLine,items,total) =>
+    zoneDelay:d=>d,
+    waMsg:(name,phone,city,addr,payment,promoLine,items,total)=>
       `🛍️ *NOUVELLE COMMANDE — Glossy Beauty*\n\n👤 *Nom :* ${name}\n📞 *WhatsApp :* ${phone}\n📍 *Ville :* ${city}\n🏠 *Adresse :* ${addr||'Non précisée'}\n💳 *Paiement :* ${payment}\n${promoLine}\n🧾 *Produits commandés :*\n${items}\n\n💰 *TOTAL : ${total} FCFA*\n\n_Commande passée via Glossy Beauty_`
   },
   en: {
-    popupTitle: 'Welcome to <em>Glossy Beauty</em>',
-    popupText: 'Enjoy <strong>-10% on your first order</strong> with the exclusive code:',
-    popupTimer: 'Offer valid for new customers only',
-    popupBtn: '&#x2728; Discover the store',
-    bannerText: 'Free delivery in Abidjan from 10,000 FCFA',
-    bannerExpires: '&#183; Offer expires in:',
-    navShop:'Shop', navPromo:'Deals', navDelivery:'Delivery', navReviews:'Reviews', navCart:'Cart',
+    popupTitle:'Welcome to <em>Glossy Beauty</em>',
+    popupText:'Enjoy <strong>-10% on your first order</strong> with the exclusive code:',
+    popupTimer:'Offer valid for new customers only',
+    popupBtn:'&#x2728; Discover the store',
+    bannerText:'Free delivery in Abidjan from 10,000 FCFA',
+    bannerExpires:'&#183; Offer expires in:',
+    navShop:'Shop',navPromo:'Deals',navDelivery:'Delivery',navReviews:'Reviews',navCart:'Cart',
     heroEyebrow:'Signature Collection 2026',
     heroTitle:'Irresistible<br><em>Lips</em>',
     heroSub:'Luxury gloss for a natural, sensual shine',
-    heroCta1:'&#x2756; Discover the collection', heroCta2:'Delivery zones',
+    heroCta1:'&#x2756; Discover the collection',heroCta2:'Delivery zones',
     marquee:['Long-Lasting Gloss','Hydrating Formula','15 Exclusive Shades','Fast Delivery','Premium Quality','500+ Customers'],
-    shopLabel:'Our Collection', shopTitle:'Our <em>Gloss</em>',
-    ftAll:'All', ftBest:'Bestsellers', ftNew:'New', ftPromo:'Deals',
-    suggLabel:'You may also like', suggTitle:'Similar <em>Products</em>',
-    addToCart:'+ Add to cart', addShort:'+ Add', share:'&#x1F4E4; Share',
-    stockMsg: n => `Only ${n} left!`,
+    shopLabel:'Our Collection',shopTitle:'Our <em>Gloss</em>',
+    ftAll:'All',ftBest:'Bestsellers',ftNew:'New',ftPromo:'Deals',
+    suggLabel:'You may also like',suggTitle:'Similar <em>Products</em>',
+    addToCart:'+ Add to cart',addShort:'+ Add',share:'&#x1F4E4; Share',
+    stockMsg:n=>`Only ${n} left!`,
     promoLabel:'Special Offer',
     promoTitle:'Save <em>10%</em><br>right now',
     promoDesc:'Use this exclusive code at checkout to get an instant discount across the entire store.',
-    copyBtn:'Copy', promoExpires:'&#x23F3; This offer expires in:',
-    timerH:'Hours', timerM:'Minutes', timerS:'Seconds',
-    delivLabel:'Shipping', delivTitle:'Delivery <em>Calculator</em>',
+    copyBtn:'Copy',promoExpires:'&#x23F3; This offer expires in:',
+    timerH:'Hours',timerM:'Minutes',timerS:'Seconds',
+    delivLabel:'Shipping',delivTitle:'Delivery <em>Calculator</em>',
     delivCalcTitle:'&#x1F69A; Calculate shipping',
     delivCalcDesc:'Select your city to see delivery fees and estimated time.',
     optChooseCity:'-- Choose your city --',
-    optAbidjanClose:'Abidjan (Nearby areas)', optAbidjanFar:'Abidjan (Farther areas)', optOther:'Other cities',
+    optAbidjanClose:'Abidjan (Nearby areas)',optAbidjanFar:'Abidjan (Farther areas)',optOther:'Other cities',
     delivZonesTitle:'&#x1F4CD; All zones',
-    zFreeFrom: n => `Free from ${n}`,
-    drDelay:'Delivery time', drFees:'Delivery fees',
-    drFreeFrom:'Free delivery from', drFreeLabel:'FREE &#x2713;', drPurchase:'of purchase',
+    zFreeFrom:n=>`Free from ${n}`,
+    drDelay:'Delivery time',drFees:'Delivery fees',
+    drFreeFrom:'Free delivery from',drFreeLabel:'FREE &#x2713;',drPurchase:'of purchase',
     drTotal:'Estimated total (current cart)',
-    reviewsLabel:'What they say', reviewsTitle:'Customer <em>Reviews</em>',
+    reviewsLabel:'What they say',reviewsTitle:'Customer <em>Reviews</em>',
     r1:"This gloss lasts all day! I never leave without my Cherry Kiss. Truly top quality.",
     r2:"Fast delivery, product as described. Rose Nude is exactly what I was looking for. I recommend!",
     r3:"I ordered 3 shades and I'm 100% satisfied. Lips stay hydrated and the shine is gorgeous.",
     r4:"Amazing product! Berry Glam is perfect for evenings. Already waiting for the next collection.",
-    aboutLabel:'Our Story', aboutTitle:'Beauty,<br><em>reinvented</em>',
+    aboutLabel:'Our Story',aboutTitle:'Beauty,<br><em>reinvented</em>',
     aboutP1:"At Glossy Beauty, every gloss is an invitation to feel beautiful, confident, and radiant. Our formulas are carefully crafted to nourish your lips while giving them an irresistible shine.",
     aboutP2:"Carefully selected shades, a light and comfortable texture &#8212; because you deserve the best.",
-    stat1:'Shades', stat2:'Customers', stat3:'Quality',
+    stat1:'Shades',stat2:'Customers',stat3:'Quality',
     faqLabel:'Frequently asked',
     faqs:[
       {q:'How long does the gloss last?',a:'Our glosses last an average of 4 to 6 hours. With a touch-up after meals, you can enjoy shiny lips all day long.'},
@@ -782,43 +980,42 @@ const T = {
     ],
     nlTitle:'Stay <em>Radiant</em> &#x1F48B;',
     nlDesc:"Sign up to receive new collections and exclusive offers first",
-    nlPlaceholder:'Your email address...', nlBtn:'Subscribe',
+    nlPlaceholder:'Your email address...',nlBtn:'Subscribe',
     footerDesc:"Your beauty is our passion. Premium quality glosses to enhance your lips every day.",
-    footerShop:'Shop', footerContact:'Contact',
-    footerAllGloss:'All glosses', footerBest:'Bestsellers', footerNew:'New', footerPromo:'Deals',
-    footerDelivery:'Delivery', footerReviews:'Reviews',
+    footerShop:'Shop',footerContact:'Contact',
+    footerAllGloss:'All glosses',footerBest:'Bestsellers',footerNew:'New',footerPromo:'Deals',
+    footerDelivery:'Delivery',footerReviews:'Reviews',
     waTooltip:'Contact us',
-    cartTitle:'My Cart', cartEmpty:'Your cart is empty',
-    cartSubtotal:'Subtotal', cartDiscount:'Discount', cartTotal:'Total',
+    cartTitle:'My Cart',cartEmpty:'Your cart is empty',
+    cartSubtotal:'Subtotal',cartDiscount:'Discount',cartTotal:'Total',
     cartOrderBtn:'&#x2713; Order',
-    promoPlaceholder:'Promo code...', promoApplyBtn:'Apply',
-    promoOk: (code,label) => `&#x2713; Code "${code}" applied! ${label} discount`,
+    promoPlaceholder:'Promo code...',promoApplyBtn:'Apply',
+    promoOk:(code,label)=>`&#x2713; Code "${code}" applied! ${label} discount`,
     promoErr:"Invalid code. Try GLOSSY10 &#x1F609;",
-    orderTitle:'Complete your order', orderSummaryLabel:'Summary', totalLabel:'Total',
-    fLabelName:'Full name', fNamePh:'Your name and surname',
-    fLabelPhone:'WhatsApp number', fLabelCity:'Delivery city',
+    orderTitle:'Complete your order',orderSummaryLabel:'Summary',totalLabel:'Total',
+    fLabelName:'Full name',fNamePh:'Your name and surname',
+    fLabelPhone:'WhatsApp number',fLabelCity:'Delivery city',
     fcityDefault:'Choose your city',
-    fcityAbjClose:'Abidjan - Nearby areas', fcityAbjFar:'Abidjan - Farther areas', fcityOther:'Other city',
-    fLabelAddr:'Full address', fAddrPh:'Neighborhood, street, details...',
-    fLabelPayment:'Payment method', fpayDefault:'Choose a payment method',
-    fpayDelivery:'&#x1F91D; Cash on delivery',
+    fcityAbjClose:'Abidjan - Nearby areas',fcityAbjFar:'Abidjan - Farther areas',fcityOther:'Other city',
+    fLabelAddr:'Full address',fAddrPh:'Neighborhood, street, details...',
+    fLabelPayment:'Payment method',
+    fpayDelivery:'Cash on delivery',
     orderConfirmBtn:'&#x1F48B; Confirm order',
     successTitle:'Order confirmed!',
     successDesc:"WhatsApp will open to send your order.<br>You'll be contacted shortly to confirm delivery. &#x2728;",
-    toastAdded: n => `${n} added! &#x1F48B;`,
-    toastCopied: c => `Code ${c} copied! &#x1F389;`,
-    toastPromo: l => `Promo code ${l} applied! &#x1F389;`,
-    toastEmpty:'Your cart is empty!', toastFill:'Please fill in all fields!',
-    toastEmailErr:'Enter a valid email!', toastNewsletter:'Thanks for subscribing! &#x1F48B;',
+    toastAdded:n=>`${n} added! &#x1F48B;`,
+    toastCopied:c=>`Code ${c} copied! &#x1F389;`,
+    toastPromo:l=>`Promo code ${l} applied! &#x1F389;`,
+    toastEmpty:'Your cart is empty!',toastFill:'Please fill in all fields!',
+    toastEmailErr:'Enter a valid email!',toastNewsletter:'Thanks for subscribing! &#x1F48B;',
     qtyLabel:'Qty:',
-    zoneDelay: d => d.replace('jours','days').replace('jour','day'),
-    waMsg: (name,phone,city,addr,payment,promoLine,items,total) =>
+    zoneDelay:d=>d.replace('jours','days').replace('jour','day'),
+    waMsg:(name,phone,city,addr,payment,promoLine,items,total)=>
       `🛍️ *NEW ORDER — Glossy Beauty*\n\n👤 *Name:* ${name}\n📞 *WhatsApp:* ${phone}\n📍 *City:* ${city}\n🏠 *Address:* ${addr||'Not specified'}\n💳 *Payment:* ${payment}\n${promoLine}\n🧾 *Products ordered:*\n${items}\n\n💰 *TOTAL: ${total} FCFA*\n\n_Order placed via Glossy Beauty_`
   }
 };
-
-// ===== DATA =====
-const products = [
+ 
+const products=[
   {id:1,name:'Cherry Kiss',desc_fr:'Teinte rouge cerise intense, brillance miroir',desc_en:'Intense cherry red, mirror shine',price:3500,icon:'&#x1F48B;',badge_fr:'Bestseller',badge_en:'Bestseller',tag:'bestseller',colors:['#C0001A','#8B0000','#FF3344'],stock:5},
   {id:2,name:'Rose Nude',desc_fr:'Rose naturel, effet l&#232;vres parfaites',desc_en:'Natural pink, perfect lips effect',price:3500,icon:'&#x1F338;',badge_fr:'',badge_en:'',tag:'',colors:['#E8B4B8','#D4898C','#F5CDD0'],stock:12},
   {id:3,name:'Berry Glam',desc_fr:'Bordeaux profond, texture fondante',desc_en:'Deep bordeaux, melting texture',price:4000,icon:'&#x1F347;',badge_fr:'Nouveau',badge_en:'New',tag:'nouveau',colors:['#6B2D3E','#8B1A4A','#A0324F'],stock:8},
@@ -828,8 +1025,8 @@ const products = [
   {id:7,name:'Plum Velvet',desc_fr:'Prune velout&#233;, sensuel et myst&#233;rieux',desc_en:'Velvety plum, sensual and mysterious',price:4000,icon:'&#x1F377;',badge_fr:'Bestseller',badge_en:'Bestseller',tag:'bestseller',colors:['#6B1F4A','#8B2060','#501540'],stock:2},
   {id:8,name:'Peach Glow',desc_fr:'P&#234;che lumineux, doux et f&#233;minin',desc_en:'Luminous peach, soft and feminine',price:3500,oldPrice:4000,icon:'&#x1F351;',badge_fr:'Promo',badge_en:'Sale',tag:'promo',colors:['#FFAA7A','#E88A55','#FFCC99'],stock:9},
 ];
-
-const deliveryZones = {
+ 
+const deliveryZones={
   abidjan_commune:{name_fr:'Abidjan (proches)',name_en:'Abidjan (nearby)',price:1000,delay:'24h',free:10000},
   abidjan_loin:{name_fr:'Abidjan (&#233;loign&#233;es)',name_en:'Abidjan (farther)',price:1500,delay:'24-48h',free:15000},
   bouake:{name_fr:'Bouak&#233;',name_en:'Bouak&#233;',price:3000,delay:'2-3 jours',free:null},
@@ -841,22 +1038,21 @@ const deliveryZones = {
   abengourou:{name_fr:'Abengourou',name_en:'Abengourou',price:3000,delay:'2-3 jours',free:null},
   autres:{name_fr:'Autres villes',name_en:'Other cities',price:4500,delay:'3-6 jours',free:null},
 };
-
-const promoCodes = {'GLOSSY10':{discount:.10,label:'-10%'},'BEAUTY20':{discount:.20,label:'-20%'},'BIENVENUE':{discount:.15,label:'-15%'}};
-
-let lang = 'fr';
-let cart = [];
-let appliedPromo = null;
-let currentFilter = 'tous';
-const qtys = {};
-products.forEach(p => qtys[p.id]=1);
-
-function t(k,...a){ const v=T[lang][k]; return typeof v==='function'?v(...a):v||''; }
-
-// ===== APPLY TRANSLATIONS =====
-function applyLang() {
-  document.documentElement.lang = lang;
-  const ids = ['popupTitle','popupText','popupTimer','popupBtn','bannerText','bannerExpires',
+ 
+const promoCodes={'GLOSSY10':{discount:.10,label:'-10%'},'BEAUTY20':{discount:.20,label:'-20%'},'BIENVENUE':{discount:.15,label:'-15%'}};
+ 
+let lang='fr';
+let cart=[];
+let appliedPromo=null;
+let currentFilter='tous';
+const qtys={};
+products.forEach(p=>qtys[p.id]=1);
+ 
+function t(k,...a){const v=T[lang][k];return typeof v==='function'?v(...a):v||'';}
+ 
+function applyLang(){
+  document.documentElement.lang=lang;
+  const ids=['popupTitle','popupText','popupTimer','popupBtn','bannerText','bannerExpires',
     'navShop','navPromo','navDelivery','navReviews','navCart',
     'heroEyebrow','heroTitle','heroSub','heroCta1','heroCta2',
     'shopLabel','shopTitle','ftAll','ftBest','ftNew','ftPromo',
@@ -870,48 +1066,45 @@ function applyLang() {
     'waTooltip','cartTitle','cartOrderBtn','promoApplyBtn',
     'orderTitle','orderSummaryLabel','totalLabel',
     'fLabelName','fLabelPhone','fLabelCity','fcityDefault','fcityAbjClose','fcityAbjFar','fcityOther',
-    'fLabelAddr','fLabelPayment','fpayDefault','fpayDelivery','orderConfirmBtn','successTitle','successDesc'
+    'fLabelAddr','fLabelPayment','fpayDelivery','orderConfirmBtn','successTitle','successDesc',
+    'mNavShop','mNavPromo','mNavDelivery','mNavReviews'
   ];
-  ids.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=t(id); });
-  const nlInput = document.getElementById('newsletterEmail');
-  if(nlInput) nlInput.placeholder = t('nlPlaceholder');
-  const fname = document.getElementById('fname');
-  if(fname) fname.placeholder = t('fNamePh');
-  const faddress = document.getElementById('faddress');
-  if(faddress) faddress.placeholder = t('fAddrPh');
-  const promoInput = document.getElementById('promoInput');
-  if(promoInput) promoInput.placeholder = t('promoPlaceholder');
-  renderMarquee();
-  renderProducts(currentFilter);
-  renderFaq();
-  renderZones();
-  updateCartUI();
-  const cv = document.getElementById('deliveryCity');
-  if(cv && cv.value) calcDelivery();
+  ids.forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=t(id);});
+  const nlInput=document.getElementById('newsletterEmail');if(nlInput)nlInput.placeholder=t('nlPlaceholder');
+  const fname=document.getElementById('fname');if(fname)fname.placeholder=t('fNamePh');
+  const faddress=document.getElementById('faddress');if(faddress)faddress.placeholder=t('fAddrPh');
+  const promoInput=document.getElementById('promoInput');if(promoInput)promoInput.placeholder=t('promoPlaceholder');
+  renderMarquee();renderProducts(currentFilter);renderFaq();renderZones();updateCartUI();
+  const cv=document.getElementById('deliveryCity');if(cv&&cv.value)calcDelivery();
 }
-
-function setLang(l) {
-  lang = l;
-  document.getElementById('btnFR').classList.toggle('active', l==='fr');
-  document.getElementById('btnEN').classList.toggle('active', l==='en');
+ 
+function setLang(l){
+  lang=l;
+  ['btnFR','btnEN','mBtnFR','mBtnEN'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.classList.toggle('active',(id.endsWith('FR')&&l==='fr')||(id.endsWith('EN')&&l==='en'));
+  });
   applyLang();
 }
-
-// ===== MARQUEE =====
-function renderMarquee() {
-  const items = t('marquee');
-  const html = [...items,...items].map(s=>`<span>${s}</span><span class="dot">&#x2756;</span>`).join('');
-  document.getElementById('marqueeTrack').innerHTML = html;
+ 
+function toggleMobileMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('mobileMenu').classList.contains('open')?'hidden':'';
 }
-
-// ===== PRODUCTS =====
-function renderProducts(filter) {
-  currentFilter = filter || 'tous';
-  const grid = document.getElementById('productsGrid');
-  const list = currentFilter==='tous' ? products : products.filter(p=>p.tag===currentFilter);
-  grid.innerHTML = list.map(p => {
-    const desc = lang==='en' ? p.desc_en : p.desc_fr;
-    const badge = lang==='en' ? p.badge_en : p.badge_fr;
+ 
+function renderMarquee(){
+  const items=t('marquee');
+  const html=[...items,...items].map(s=>`<span>${s}</span><span class="dot">&#x2756;</span>`).join('');
+  document.getElementById('marqueeTrack').innerHTML=html;
+}
+ 
+function renderProducts(filter){
+  currentFilter=filter||'tous';
+  const grid=document.getElementById('productsGrid');
+  const list=currentFilter==='tous'?products:products.filter(p=>p.tag===currentFilter);
+  grid.innerHTML=list.map(p=>{
+    const desc=lang==='en'?p.desc_en:p.desc_fr;
+    const badge=lang==='en'?p.badge_en:p.badge_fr;
     return `<div class="product-card">
       <div class="product-img">${p.icon}
         ${badge?`<div class="product-badge ${p.tag==='promo'?'promo':''}">${badge}</div>`:''}
@@ -942,36 +1135,34 @@ function renderProducts(filter) {
   }).join('');
   updateSuggestions();
 }
-
-function filterProducts(tag, btn) {
+ 
+function filterProducts(tag,btn){
   document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   renderProducts(tag);
 }
-
-function changeQty(id, d) {
-  qtys[id] = Math.max(1,(qtys[id]||1)+d);
-  const el = document.getElementById('qty-'+id);
-  if(el) el.textContent = qtys[id];
+ 
+function changeQty(id,d){
+  qtys[id]=Math.max(1,(qtys[id]||1)+d);
+  const el=document.getElementById('qty-'+id);if(el)el.textContent=qtys[id];
 }
-
-function shareProduct(id) {
-  const p = products.find(x=>x.id===id);
-  const url = window.location.href;
-  const msg = lang==='en'
-    ? `✨ Discover ${p.name} at Glossy Beauty! Only ${p.price.toLocaleString('fr-FR')} FCFA. Order: ${url}`
-    : `✨ Découvrez le ${p.name} chez Glossy Beauty ! ${p.price.toLocaleString('fr-FR')} FCFA seulement. Commander : ${url}`;
-  if(navigator.share) navigator.share({title:'Glossy Beauty',text:msg,url});
+ 
+function shareProduct(id){
+  const p=products.find(x=>x.id===id);
+  const url=window.location.href;
+  const msg=lang==='en'
+    ?`✨ Discover ${p.name} at Glossy Beauty! Only ${p.price.toLocaleString('fr-FR')} FCFA. Order: ${url}`
+    :`✨ Découvrez le ${p.name} chez Glossy Beauty ! ${p.price.toLocaleString('fr-FR')} FCFA seulement. Commander : ${url}`;
+  if(navigator.share)navigator.share({title:'Glossy Beauty',text:msg,url});
   else window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
 }
-
-// ===== SUGGESTIONS =====
-function updateSuggestions() {
-  const inCart = cart.map(i=>i.id);
-  const sugg = products.filter(p=>!inCart.includes(p.id)).slice(0,4);
+ 
+function updateSuggestions(){
+  const inCart=cart.map(i=>i.id);
+  const sugg=products.filter(p=>!inCart.includes(p.id)).slice(0,4);
   if(cart.length===0||sugg.length===0){document.getElementById('suggestionsSection').style.display='none';return;}
   document.getElementById('suggestionsSection').style.display='block';
-  document.getElementById('suggestionsGrid').innerHTML = sugg.map(p=>`
+  document.getElementById('suggestionsGrid').innerHTML=sugg.map(p=>`
     <div class="product-card">
       <div class="product-img" style="font-size:3rem">${p.icon}${(lang==='en'?p.badge_en:p.badge_fr)?`<div class="product-badge ${p.tag==='promo'?'promo':''}">${lang==='en'?p.badge_en:p.badge_fr}</div>`:''}</div>
       <div class="product-info">
@@ -981,38 +1172,37 @@ function updateSuggestions() {
       </div>
     </div>`).join('');
 }
-
-// ===== CART =====
-function addToCart(id) {
-  const p = products.find(x=>x.id===id);
-  const qty = qtys[id]||1;
-  const ex = cart.find(i=>i.id===id);
-  if(ex) ex.qty+=qty; else cart.push({...p,qty});
-  updateCartUI(); showToast(t('toastAdded',p.name));
-  qtys[id]=1; const el=document.getElementById('qty-'+id); if(el) el.textContent=1;
+ 
+function addToCart(id){
+  const p=products.find(x=>x.id===id);
+  const qty=qtys[id]||1;
+  const ex=cart.find(i=>i.id===id);
+  if(ex)ex.qty+=qty;else cart.push({...p,qty});
+  updateCartUI();showToast(t('toastAdded',p.name));
+  qtys[id]=1;const el=document.getElementById('qty-'+id);if(el)el.textContent=1;
   updateSuggestions();
 }
-
-function removeFromCart(id) { cart=cart.filter(i=>i.id!==id); updateCartUI(); updateSuggestions(); }
-
-function applyPromo() {
-  const code = document.getElementById('promoInput').value.trim().toUpperCase();
-  const msg = document.getElementById('promoMsg');
-  if(promoCodes[code]) {
-    appliedPromo = {...promoCodes[code], code};
-    msg.className='promo-msg ok'; msg.innerHTML=t('promoOk',code,appliedPromo.label);
-    updateCartUI(); showToast(t('toastPromo',appliedPromo.label));
+ 
+function removeFromCart(id){cart=cart.filter(i=>i.id!==id);updateCartUI();updateSuggestions();}
+ 
+function applyPromo(){
+  const code=document.getElementById('promoInput').value.trim().toUpperCase();
+  const msg=document.getElementById('promoMsg');
+  if(promoCodes[code]){
+    appliedPromo={...promoCodes[code],code};
+    msg.className='promo-msg ok';msg.innerHTML=t('promoOk',code,appliedPromo.label);
+    updateCartUI();showToast(t('toastPromo',appliedPromo.label));
   } else {
-    msg.className='promo-msg err'; msg.innerHTML=t('promoErr');
-    appliedPromo=null; updateCartUI();
+    msg.className='promo-msg err';msg.innerHTML=t('promoErr');
+    appliedPromo=null;updateCartUI();
   }
 }
-
-function updateCartUI() {
-  const count = cart.reduce((s,i)=>s+i.qty,0);
-  const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const discount = appliedPromo?Math.round(subtotal*appliedPromo.discount):0;
-  const total = subtotal-discount;
+ 
+function updateCartUI(){
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const discount=appliedPromo?Math.round(subtotal*appliedPromo.discount):0;
+  const total=subtotal-discount;
   document.getElementById('cartCount').textContent=count;
   const itemsEl=document.getElementById('cartItems');
   if(cart.length===0){
@@ -1034,14 +1224,14 @@ function updateCartUI() {
     ${discount>0?`<div class="cart-total-row" style="color:#25D366"><span>${t('cartDiscount')} (${appliedPromo.label})</span><span>-${discount.toLocaleString('fr-FR')} FCFA</span></div>`:''}
     <div class="cart-total-row main"><span>${t('cartTotal')}</span><span>${total.toLocaleString('fr-FR')} FCFA</span></div>`;
 }
-
-function toggleCart() {
+ 
+function toggleCart(){
   document.getElementById('cartOverlay').classList.toggle('open');
   document.getElementById('cartSidebar').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('cartSidebar').classList.contains('open')?'hidden':'';
 }
-
-// ===== ORDER =====
-function openOrder() {
+ 
+function openOrder(){
   if(cart.length===0){showToast(t('toastEmpty'));return;}
   toggleCart();
   const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
@@ -1053,11 +1243,15 @@ function openOrder() {
   document.getElementById('orderBody').style.display='block';
   document.getElementById('successMsg').style.display='none';
   document.getElementById('orderModal').classList.add('open');
+  document.body.style.overflow='hidden';
 }
-
-function closeOrder(){document.getElementById('orderModal').classList.remove('open')}
-
-function placeOrder() {
+ 
+function closeOrder(){
+  document.getElementById('orderModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+ 
+function placeOrder(){
   const name=document.getElementById('fname').value.trim();
   const phone=document.getElementById('fphone').value.trim();
   const city=document.getElementById('fcity').value;
@@ -1070,14 +1264,13 @@ function placeOrder() {
   const items=cart.map(i=>`• ${i.name} x${i.qty} — ${(i.price*i.qty).toLocaleString('fr-FR')} FCFA`).join('\n');
   const promoLine=appliedPromo?`🎟 ${lang==='en'?'Promo code':'Code promo'}: ${appliedPromo.code} (${appliedPromo.label})\n`:'';
   const msg=T[lang].waMsg(name,phone,city,address,payment,promoLine,items,total.toLocaleString('fr-FR'));
-  window.open(`https://wa.me/2250759591454?text=${encodeURIComponent(msg)}`,'_blank');
+  window.open(`https://wa.me/2250143159266?text=${encodeURIComponent(msg)}`,'_blank');
   document.getElementById('orderBody').style.display='none';
   document.getElementById('successMsg').style.display='block';
   cart=[];appliedPromo=null;updateCartUI();updateSuggestions();
 }
-
-// ===== DELIVERY =====
-function renderZones() {
+ 
+function renderZones(){
   document.getElementById('zoneList').innerHTML=Object.values(deliveryZones).map(z=>`
     <div class="zone-item">
       <div><div class="zone-name">${z['name_'+lang]}</div><div class="zone-delay">&#x23F1; ${t('zoneDelay',z.delay)}</div></div>
@@ -1087,8 +1280,8 @@ function renderZones() {
       </div>
     </div>`).join('');
 }
-
-function calcDelivery() {
+ 
+function calcDelivery(){
   const key=document.getElementById('deliveryCity').value;
   const r=document.getElementById('deliveryResult');
   if(!key){r.style.display='none';return;}
@@ -1103,27 +1296,25 @@ function calcDelivery() {
     ${z.free?`<div class="dr-row"><span>${t('drFreeFrom')}</span><span>${z.free.toLocaleString('fr-FR')} FCFA ${t('drPurchase')}</span></div>`:''}
     <div class="dr-row"><span>${t('drTotal')}</span><span>${(subtotal+(free?0:z.price)).toLocaleString('fr-FR')} FCFA</span></div>`;
 }
-
-// ===== FAQ =====
-function renderFaq() {
+ 
+function renderFaq(){
   document.getElementById('faqList').innerHTML=t('faqs').map((f,i)=>`
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(${i},this)">${f.q}<span class="arrow">+</span></button>
       <div class="faq-a" id="faq-${i}">${f.a}</div>
     </div>`).join('');
 }
-
-function toggleFaq(i,btn) {
+ 
+function toggleFaq(i,btn){
   const a=document.getElementById('faq-'+i);
   const open=a.classList.contains('open');
   document.querySelectorAll('.faq-a').forEach(e=>e.classList.remove('open'));
   document.querySelectorAll('.faq-q').forEach(e=>e.classList.remove('open'));
   if(!open){a.classList.add('open');btn.classList.add('open');}
 }
-
-// ===== TIMER =====
-function startTimer() {
-  let end = localStorage.getItem('glossyTimerEnd');
+ 
+function startTimer(){
+  let end=localStorage.getItem('glossyTimerEnd');
   if(!end||Date.now()>parseInt(end)){end=Date.now()+6*3600000;localStorage.setItem('glossyTimerEnd',end);}
   function tick(){
     const diff=Math.max(0,parseInt(end)-Date.now());
@@ -1134,9 +1325,8 @@ function startTimer() {
   }
   tick();setInterval(tick,1000);
 }
-
-// ===== MISC =====
-function closePopup(){document.getElementById('popupOverlay').classList.remove('open')}
+ 
+function closePopup(){document.getElementById('popupOverlay').classList.remove('open');}
 function copyCode(code){navigator.clipboard.writeText(code).catch(()=>{});showToast(t('toastCopied',code));}
 function subscribeNewsletter(){
   const email=document.getElementById('newsletterEmail').value.trim();
@@ -1145,22 +1335,20 @@ function subscribeNewsletter(){
 }
 function toggleTheme(){
   document.body.classList.toggle('light');
-  document.querySelector('.theme-btn').textContent=document.body.classList.contains('light')?'🌙':'☀️';
+  const icon=document.body.classList.contains('light')?'🌙':'☀️';
+  document.querySelectorAll('.theme-btn').forEach(b=>b.textContent=icon);
 }
 function showToast(msg){
   const el=document.getElementById('toast');
   el.innerHTML=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);
 }
-
-// ===== CURSOR =====
-let mx=0,my=0,fx=0,fy=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  document.getElementById('cursor').style.cssText=`left:${mx-5}px;top:${my-5}px`;
-});
-(function animF(){fx+=(mx-fx-16)*.12;fy+=(my-fy-16)*.12;document.getElementById('follower').style.cssText=`left:${fx}px;top:${fy}px`;requestAnimationFrame(animF);})();
-
-// ===== PARTICLES =====
+function selectPay(btn,value){
+  document.querySelectorAll('.pay-method-btn').forEach(b=>{b.classList.remove('selected');});
+  btn.classList.add('selected');
+  document.getElementById('fpayment').value=value;
+}
+ 
+// Particles
 (function(){
   const c=document.getElementById('particles');
   for(let i=0;i<18;i++){
@@ -1170,33 +1358,30 @@ document.addEventListener('mousemove',e=>{
     c.appendChild(p);
   }
 })();
-
-window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);});
-
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    document.getElementById('loader').classList.add('hide');
-    setTimeout(()=>document.getElementById('popupOverlay').classList.add('open'),800);
-  },2000);
+ 
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
 });
-
-// ===== SELECT PAYMENT =====
-function selectPay(btn, value) {
-  document.querySelectorAll('[onclick^="selectPay"]').forEach(b => {
-    b.style.borderColor = 'rgba(255,255,255,.1)';
-    b.style.background = 'rgba(255,255,255,.04)';
-  });
-  btn.style.borderColor = '#C0001A';
-  btn.style.background = 'rgba(192,0,26,.15)';
-  document.getElementById('fpayment').value = value;
+ 
+// Close mobile menu on outside click
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!document.querySelector('.hamburger').contains(e.target)){
+    toggleMobileMenu();
+  }
+});
+ 
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+ 
+function hideLoader(){
+  document.getElementById('loader').style.display='none';
+  document.getElementById('loader').classList.add('hide');
+  setTimeout(()=>document.getElementById('popupOverlay').classList.add('open'),800);
 }
-// ===== INIT =====
-applyLang();
-startTimer();
-updateCartUI();
+setTimeout(hideLoader,1000);
 </script>
 </body>
 </html>
